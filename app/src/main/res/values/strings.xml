@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">urchin</string>
+    <string name="tips_1">网络无法访问，请检查网络</string>
+    <string name="tips_2">没有更多的数据了</string>
+    <string name="tips_3">数据请求失败，请重试</string>
+    <string name="tips_4">暂无数据</string>
+
+
+    <string name="app_name">Urchin</string>
+    <string name="app_name_test">TUrchin</string>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="hint">提示</string>
+    <string name="retry">重试</string>
+    <string name="zihhu_news">知乎日报</string>
+
 </resources>

@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark">#4C8FE1</color>
+    <color name="colorPrimary">#4C8FE1</color>
+    <color name="colorAccent">#5D9EE5</color>
+
+    <color name="background">#F8F8F8</color>
+    <color name="background_gray">#393A3F</color>
+    <color name="status_gray">#222222</color>
+    <color name="gray_back">#E3E3E3</color>
+    <color name="red">#FF0000</color>
+
+    <color name="red_line">#D61C16</color>
+    <color name="gray_line">#EEEEEE</color>
+
+    <color name="text_title">#222222</color>
+    <color name="text_content_light">#666666</color>
+    <color name="text_content">#454545</color>
+    <color name="text_remark">#888888</color>
+    <color name="text_hint">#D5D5D5</color>
+    <color name="btn_gray_bg">#E1E1E1</color>
+
+    <color name="white_pressed">#ffd5d5d5</color>
+    <color name="stand_bg">#ffffff</color>
+
+    <color name="black">#000000</color>
+    <color name="black_one">#323232</color>
+
+    <color name="dialog_black_bg">#EF252525</color>
+    <color name="dialog_white_bg">#EEFFFFFF</color>
+
+    <color name="divide_line">#EAEAEA</color>
+
+    <color name="blackSub">#343434</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="whiteAdd">#F3F3F3</color>
+
+    <!-- 导航栏颜色  -->
+    <color name="tab_nav_normal">#999999</color>
+    <color name="tab_nav_press">#348FE7</color>
+
+    <color name="tab_layout_normal">#666666</color>
+    <color name="tab_layout_press">#1B72E4</color>
+
+    <color name="dialog_bg_color">#ddffffff</color>
+
+    <color name="orange_1">#E35E27</color>
+    <color name="orange_2">#FFECE5</color>
+
+    <color name="blue_1">#357EE7</color>
+    <color name="blue_2">#E3F1FE</color>
+
+    <color name="green_1">#1CC47F</color>
+
 </resources>

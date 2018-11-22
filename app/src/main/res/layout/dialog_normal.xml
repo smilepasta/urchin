@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/dp_16">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/font_18sp"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/contentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTextView"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_16"
+        android:textColor="@color/blackSub"
+        android:textSize="@dimen/font_16sp" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/confirmTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/contentTextView"
+        android:background="@drawable/recycler_item_selector"
+        android:clickable="true"
+        android:padding="@dimen/dp_10"
+        android:text="@string/confirm"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/font_14sp"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/cancelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contentTextView"
+        android:layout_toLeftOf="@id/confirmTextView"
+        android:background="@drawable/recycler_item_selector"
+        android:clickable="true"
+        android:padding="@dimen/dp_10"
+        android:text="@string/cancel"
+        android:textColor="@color/text_remark"
+        android:textSize="@dimen/font_14sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
