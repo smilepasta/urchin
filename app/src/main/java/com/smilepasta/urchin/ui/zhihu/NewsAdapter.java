@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.ui.main.adapter;
+package com.smilepasta.urchin.ui.zhihu;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,16 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.bean.ZhiHuNewsBean;
 import com.smilepasta.urchin.ui.common.listener.IOnItemClickListener;
 import com.smilepasta.urchin.utils.GlideUtil;
 import com.smilepasta.urchin.utils.StringUtil;
-import com.smilepasta.urchin.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

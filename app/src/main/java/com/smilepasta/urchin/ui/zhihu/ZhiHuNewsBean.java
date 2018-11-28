@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.bean;
+package com.smilepasta.urchin.ui.zhihu;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.smilepasta.urchin.http.service;
 
-import com.smilepasta.urchin.bean.ZhiHuNewsBean;
+import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 import com.smilepasta.urchin.http.UrlParser;
 
 import retrofit2.http.GET;

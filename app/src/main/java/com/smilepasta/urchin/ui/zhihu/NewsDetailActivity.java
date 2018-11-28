@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.ui.main;
+package com.smilepasta.urchin.ui.zhihu;
 
 import android.app.Activity;
 import android.os.Bundle;

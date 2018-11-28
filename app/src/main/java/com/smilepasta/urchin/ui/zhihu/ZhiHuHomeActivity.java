@@ -1,14 +1,11 @@
-package com.smilepasta.urchin.ui.main;
+package com.smilepasta.urchin.ui.zhihu;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
-import com.smilepasta.urchin.ui.main.fragment.NewsListFragment;
 import com.smilepasta.urchin.utils.UIUtil;
 
 public class ZhiHuHomeActivity extends TextBarActivity {
@@ -24,10 +21,6 @@ public class ZhiHuHomeActivity extends TextBarActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, newsListFragment);
         ft.commit();
-    }
-
-    public static void start(Activity activity) {
-        activity.startActivity(new Intent(activity, ZhiHuHomeActivity.class));
     }
 
     @Override

@@ -36,8 +36,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".ui.main.NewsDetailActivity" />
-        <activity android:name=".ui.main.ZhiHuHomeActivity" />
+        <activity android:name=".ui.zhihu.NewsDetailActivity" />
+        <activity android:name=".ui.zhihu.ZhiHuHomeActivity" />
+        <activity android:name=".ui.demo.TryHomeActivity" />
+        <activity android:name=".ui.demo.TryDemoActivity" />
+        <activity android:name=".ui.common.PhotoViewActivity" />
     </application>
 
 </manifest>

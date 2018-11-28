@@ -2,25 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.demo.TryHomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible">
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_zhihu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/colorPrimary"
-            android:text="@string/zihhu_news"
-            android:textColor="@color/white" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_try"
@@ -29,8 +17,9 @@
             android:layout_marginBottom="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@color/colorPrimary"
-            android:text="@string/try_set"
+            android:text="@string/protobuf_demo"
             android:textColor="@color/white" />
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.ui.main.fragment;
+package com.smilepasta.urchin.ui.zhihu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.bean.ZhiHuNewsBean;
 import com.smilepasta.urchin.presenter.implPresenter.IBeforeNewsPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.IBeforeNewsView;
 import com.smilepasta.urchin.ui.common.basic.BasicZhiHuListFragment;
 import com.smilepasta.urchin.ui.common.listener.IOnItemClickListener;
-import com.smilepasta.urchin.ui.main.NewsDetailActivity;
-import com.smilepasta.urchin.ui.main.adapter.NewsAdapter;
+import com.smilepasta.urchin.ui.common.viewholder.LoadMoreFooter;
+import com.smilepasta.urchin.utils.DateUtil;
+import com.smilepasta.urchin.utils.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,8 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
     private NewsAdapter newsAdapter;
     private List<ZhiHuNewsBean.StoriesBean> newList = new ArrayList<>();
 
+    boolean isFirst = true;
+
     @Override
     protected void onChildRefresh() {
         doGetLatestNews();
@@ -47,17 +49,42 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
         //判断是否是第一次获取数据
         if (!isInitData) {
             newsAdapter.clearData();
-            //判断是否第一页有数据，如果没数据就返回false
-            if (!isFirstDataGetSuccess(dataBean.getStories() == null ? 0 : dataBean.getStories().size())) {
-                return;
+//            if (isFirst) {
+//                dataBean.setStories(new ArrayList<>());
+//                isFirst = false;
+//            }
+            if (dataBean.getStories().size() > 0) {
+                //如果有数据，就显示初始化成功
+                isInitData = true;
+                listView.setVisibility(View.VISIBLE);
+                statusLayout.setVisibility(View.GONE);
+                newList.addAll(dataBean.getStories());
+                newsAdapter.setData(newList);
+                loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
+            } else {
+                //如果没有数据，就表示还没初始化，下次到这个页面时，要再更新数据
+                statusLayout.setVisibility(View.VISIBLE);
+                loadRetryBtn.setVisibility(View.GONE);
+                listView.setVisibility(View.GONE);
+                swipeRefreshLayout.setNestedScrollingEnabled(false);
+                loadStatusTextView.setText(UIUtil.getString(mContext, R.string.tips_4));
+            }
+            hideSwipeRefreshLayout();
+        } else {
+            if (dataBean.getStories() != null) {
+                newList.addAll(dataBean.getStories());
+                newsAdapter.setData(newList);
+                //判断第二页的数据是否小于10条，如果小于10条，就显示加载数据完毕，有更多就设置加载中状态
+                hideSwipeRefreshLayout();
+                if (dataBean.getStories().size() == 0) {
+                    loadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
+                } else {
+                    setLoadingStatus();
+                }
+                pageDate = DateUtil.getDecrementPageDate(pageDate);
             }
         }
-        if (dataBean.getStories() != null) {
-            newList.addAll(dataBean.getStories());
-            newsAdapter.setData(newList);
-            //判断第二页的数据是否小于10条，如果小于10条，就显示加载数据完毕，有更多就设置加载中状态
-            checkLoadFinishStatus(dataBean.getStories().size());
-        }
+
     }
 
     @Override

@@ -30,4 +30,5 @@
         <attr name="isAutoPlay" format="boolean|reference" />
     </declare-styleable>
 
+
 </resources>

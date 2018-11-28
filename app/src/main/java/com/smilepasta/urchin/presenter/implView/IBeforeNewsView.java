@@ -1,6 +1,6 @@
 package com.smilepasta.urchin.presenter.implView;
 
-import com.smilepasta.urchin.bean.ZhiHuNewsBean;
+import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 
 /**
  * Author: huangxiaoming

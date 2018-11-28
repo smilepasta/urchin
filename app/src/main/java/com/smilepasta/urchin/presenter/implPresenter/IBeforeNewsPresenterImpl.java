@@ -1,6 +1,6 @@
 package com.smilepasta.urchin.presenter.implPresenter;
 
-import com.smilepasta.urchin.bean.ZhiHuNewsBean;
+import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 import com.smilepasta.urchin.http.HttpManager;
 import com.smilepasta.urchin.http.service.ZhiHuService;
 import com.smilepasta.urchin.presenter.IBeforeNewsPresenter;
