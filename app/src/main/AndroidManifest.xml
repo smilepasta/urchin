@@ -41,6 +41,7 @@
         <activity android:name=".ui.demo.TryHomeActivity" />
         <activity android:name=".ui.demo.TryDemoActivity" />
         <activity android:name=".ui.common.PhotoViewActivity" />
+        <activity android:name=".ui.common.WebViewActivity" />
     </application>
 
 </manifest>

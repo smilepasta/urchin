@@ -15,6 +15,7 @@ public class UrlParser {
 
     public final static String API_LATEST = API_PREFIX + "/news/latest";//最新消息
     public final static String API_BEFORE = API_PREFIX + "/news/before/{pageDate}";//过往消息
+    public final static String API_NEWS_DETAIL = API_PREFIX +"/news/{detailId}";//消息详情
 
 
 }

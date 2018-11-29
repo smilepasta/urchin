@@ -3,6 +3,7 @@
     <string name="tips_2">没有更多的数据了</string>
     <string name="tips_3">数据请求失败，请重试</string>
     <string name="tips_4">暂无数据</string>
+    <string name="tips_5">数据请求失败，是否重试？</string>
 
 
     <string name="app_name">Urchin</string>

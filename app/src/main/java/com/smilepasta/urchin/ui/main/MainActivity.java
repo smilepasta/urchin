@@ -1,5 +1,6 @@
 package com.smilepasta.urchin.ui.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,15 +22,19 @@ public class MainActivity extends TextBarActivity {
         findViewById(R.id.btn_zhihu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ZhiHuHomeActivity.class));
+                ZhiHuHomeActivity.start(MainActivity.this);
             }
         });
         findViewById(R.id.btn_try).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TryHomeActivity.class));
+                TryHomeActivity.start(MainActivity.this);
             }
         });
+    }
+
+    public static void start(Activity activity) {
+        activity.startActivity(new Intent(activity, MainActivity.class));
     }
 
     @Override
@@ -39,7 +44,6 @@ public class MainActivity extends TextBarActivity {
         setTitleTextView(UIUtil.getString(this, R.string.app_name));
 
         initView();
-
     }
 
 }

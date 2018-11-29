@@ -1,5 +1,6 @@
 package com.smilepasta.urchin.ui.common;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -165,6 +166,16 @@ public class PhotoViewActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+    }
+
+    public static void start(Activity activity, ArrayList<String> imgList, String imgType) {
+        Intent intent = new Intent(activity, PhotoViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("type", imgType);
+        bundle.putStringArrayList("list", imgList);
+        //从第几张图片打开的预览图片
+        intent.putExtras(bundle);
+        activity.startActivity(intent);
     }
 
 }

@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:orientation="vertical"
     tools:context="com.smilepasta.urchin.ui.zhihu.NewsDetailActivity">
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="@dimen/dp_30"
+        android:paddingTop="@dimen/dp_30">
+
+        <com.smilepasta.urchin.widget.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/dp_125"
+            android:layout_height="@dimen/dp_125"
+            android:layout_centerHorizontal="true"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="3dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_head"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_weight="1" />
+
+</RelativeLayout>

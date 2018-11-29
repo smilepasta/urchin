@@ -32,8 +32,6 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
     private NewsAdapter newsAdapter;
     private List<ZhiHuNewsBean.StoriesBean> newList = new ArrayList<>();
 
-    boolean isFirst = true;
-
     @Override
     protected void onChildRefresh() {
         doGetLatestNews();
@@ -49,10 +47,6 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
         //判断是否是第一次获取数据
         if (!isInitData) {
             newsAdapter.clearData();
-//            if (isFirst) {
-//                dataBean.setStories(new ArrayList<>());
-//                isFirst = false;
-//            }
             if (dataBean.getStories().size() > 0) {
                 //如果有数据，就显示初始化成功
                 isInitData = true;
@@ -81,10 +75,9 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
                 } else {
                     setLoadingStatus();
                 }
-                pageDate = DateUtil.getDecrementPageDate(pageDate);
             }
         }
-
+        pageDate = DateUtil.getDecrementPageDate(pageDate);
     }
 
     @Override
@@ -99,7 +92,12 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
 
     @Override
     public void showError(String error) {
-        showErrorView();
+        //加载第一页时出现错误，处理方式
+        if (!isInitData) {
+            showFailedStatus();
+        } else {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED); // 加载失败了给错误状态
+        }
     }
 
     private void initData() {
@@ -119,6 +117,10 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(mContext, NewsDetailActivity.class);
+                ZhiHuNewsBean.StoriesBean storiesBean = newList.get(position);
+                if (storiesBean != null) {
+                    intent.putExtra(NewsDetailActivity.KEY_DETAIL_ID, storiesBean.getId());
+                }
                 startActivity(intent);
             }
         });

@@ -2,6 +2,7 @@ package com.smilepasta.urchin.http.service;
 
 import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 import com.smilepasta.urchin.http.UrlParser;
+import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsDetailBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -34,5 +35,9 @@ public interface ZhiHuService {
 
     @GET(UrlParser.API_BEFORE)
     Observable<ZhiHuNewsBean> getBeforeNews(@Path("pageDate") int pageDate);
+
+    @GET(UrlParser.API_NEWS_DETAIL)
+    Observable<ZhiHuNewsDetailBean> getNewsDetail(@Path("detailId") String detailId);
+
 
 }

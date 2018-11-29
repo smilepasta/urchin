@@ -102,7 +102,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void nextActivity() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        MainActivity.start(this);
         finish();
     }
 
@@ -134,7 +134,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
         bgImageView = findViewById(R.id.iv_splash_bg);
         AppUtil.hideStatusNavigationBar(this);
         animateImage();
