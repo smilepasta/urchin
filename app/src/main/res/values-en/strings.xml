@@ -1,0 +1,27 @@
+<resources>
+    <string name="tips_1">The network is inaccessible, please check the network</string>
+    <string name="tips_2">No more data</string>
+    <string name="tips_3">Data request failed, please try again</string>
+    <string name="tips_4">No data</string>
+    <string name="tips_5">The data request failed. Do you want to try again?</string>
+    <string name="tips_6">Undeveloped</string>
+
+    <string name="app_name">Urchin</string>
+    <string name="app_name_test">TUrchin</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="hint">Tips</string>
+    <string name="retry">Retry</string>
+    <string name="zihhu_news">Zhihu Daily</string>
+    <string name="try_set">Try it</string>
+    <string name="protobuf_demo">Protobuf usage</string>
+
+    <string name="setting">Setting</string>
+    <string name="language_switch">Language</string>
+    <string name="clear_cache">Clear cache</string>
+    <string name="version_upgrade">Version upgrade</string>
+    <string name="about_me">About me</string>
+    <string name="font_size">Font size</string>
+
+</resources>

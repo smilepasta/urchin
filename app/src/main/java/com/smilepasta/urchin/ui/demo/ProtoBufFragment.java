@@ -1,7 +1,7 @@
 package com.smilepasta.urchin.ui.demo;
 
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,8 +18,6 @@ import com.smilepasta.urchin.ui.common.basic.BasicFragment;
 import com.smilepasta.urchin.utils.GlideUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,27 +63,16 @@ public class ProtoBufFragment extends BasicFragment {
         roundImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPhotoViewActivity(0);
+                PhotoViewActivity.start((Activity) mContext, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL, 0);
             }
         });
 
         roundImageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPhotoViewActivity(1);
+                PhotoViewActivity.start((Activity) mContext, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL, 1);
             }
         });
-    }
-
-    private void startPhotoViewActivity(int startPageIndex) {
-        Intent intent = new Intent(mContext, PhotoViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("type", PhotoViewActivity.IMAGE_PATH_TYPE_URL);
-        bundle.putStringArrayList("list", (ArrayList<String>) imgList);
-        //从第几张图片打开的预览图片
-        bundle.putInt("index", startPageIndex);
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 
     @Override

@@ -42,6 +42,8 @@
         <activity android:name=".ui.demo.TryDemoActivity" />
         <activity android:name=".ui.common.PhotoViewActivity" />
         <activity android:name=".ui.common.WebViewActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.setting.SettingContainerActivity" />
     </application>
 
 </manifest>

@@ -36,6 +36,10 @@ public class PhotoViewActivity extends AppCompatActivity {
     public final static String IMAGE_PATH_TYPE_URI = "uri";
     public final static String IMAGE_PATH_TYPE_URL = "str";
 
+    public final static String IMAGE_PATH_TYPE = "type";
+    public final static String IMAGE_PATH_LIST = "list";
+    public final static String IMAGE_LIST_BEGIN_INDEX = "index";
+
     private String type;
     private int index;
     private int count = 0;
@@ -66,17 +70,17 @@ public class PhotoViewActivity extends AppCompatActivity {
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
-                type = bundle.getString("type");
-                index = bundle.getInt("index");
+                type = bundle.getString(IMAGE_PATH_TYPE);
+                index = bundle.getInt(IMAGE_LIST_BEGIN_INDEX);
                 //用户传入的是uri list
                 if (type.equals(IMAGE_PATH_TYPE_URI)) {
-                    imgUriList = bundle.getParcelableArrayList("list");
+                    imgUriList = bundle.getParcelableArrayList(IMAGE_PATH_LIST);
                     if (imgUriList != null && imgUriList.size() > 0) {
                         count = imgUriList.size();
                         mPager.setAdapter(new UriPagerAdapter());
                     }
                 } else if (type.equals(IMAGE_PATH_TYPE_URL)) {
-                    imgStrList = bundle.getStringArrayList("list");
+                    imgStrList = bundle.getStringArrayList(IMAGE_PATH_LIST);
                     if (imgStrList != null && imgStrList.size() > 0) {
                         count = imgStrList.size();
                         mPager.setAdapter(new StrPagerAdapter());
@@ -168,12 +172,12 @@ public class PhotoViewActivity extends AppCompatActivity {
         }
     }
 
-    public static void start(Activity activity, ArrayList<String> imgList, String imgType) {
+    public static void start(Activity activity, ArrayList<String> imgList, String imgType, int beginIndex) {
         Intent intent = new Intent(activity, PhotoViewActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type", imgType);
-        bundle.putStringArrayList("list", imgList);
-        //从第几张图片打开的预览图片
+        bundle.putString(IMAGE_PATH_TYPE, imgType);
+        bundle.putStringArrayList(IMAGE_PATH_LIST, imgList);
+        bundle.putInt(IMAGE_LIST_BEGIN_INDEX, beginIndex);
         intent.putExtras(bundle);
         activity.startActivity(intent);
     }

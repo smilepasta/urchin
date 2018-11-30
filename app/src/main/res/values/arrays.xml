@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 语言选择列表名称 -->
+    <string-array name="language_name_array">
+        <item>简体中文</item>
+        <item>English</item>
+    </string-array>
+
+    <!-- 语言选择列表名称对应的值 -->
+    <string-array name="language_value_array">
+        <item>zh</item>
+        <item>en</item>
+    </string-array>
+</resources>

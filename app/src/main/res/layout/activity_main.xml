@@ -33,6 +33,17 @@
             android:text="@string/try_set"
             android:textColor="@color/white" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/colorPrimary"
+            android:text="@string/setting"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </ScrollView>

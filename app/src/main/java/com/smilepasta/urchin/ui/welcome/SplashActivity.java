@@ -13,11 +13,11 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.smilepasta.urchin.R;
+import com.smilepasta.urchin.ui.common.basic.BasicActivity;
 import com.smilepasta.urchin.ui.main.MainActivity;
 import com.smilepasta.urchin.utils.AppUtil;
 import com.smilepasta.urchin.utils.DialogUtil;
@@ -31,7 +31,7 @@ import com.smilepasta.urchin.utils.UIUtil;
  * Desc: 引导页
  * Version: 1.0
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BasicActivity {
     private static final int ANIMATION_DURATION = 2000;
     private static final float SCALE_END = 1.13F;
 
@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     private void showNetworkErrorDialog() {
         DialogUtil.query(this
                 , UIUtil.getString(this, R.string.hint)
-                , getString(R.string.tips_1)
+                , UIUtil.getString(this, R.string.tips_1)
                 , new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

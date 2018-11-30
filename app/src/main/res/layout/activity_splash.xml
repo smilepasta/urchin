@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp_42"
         android:layout_marginTop="@dimen/dp_80"
-        android:text="Urchin"
+        android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="@dimen/font_36sp"
         android:textStyle="bold"

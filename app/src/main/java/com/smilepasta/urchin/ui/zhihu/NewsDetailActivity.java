@@ -2,8 +2,6 @@ package com.smilepasta.urchin.ui.zhihu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.DashPathEffect;
-import android.graphics.PathEffect;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -74,7 +72,7 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
                     public void onClick(View v) {
                         ArrayList<String> imgList = new ArrayList<>();
                         imgList.add(dataBean.getImage());
-                        PhotoViewActivity.start(NewsDetailActivity.this, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL);
+                        PhotoViewActivity.start(NewsDetailActivity.this, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL, 0);
                     }
                 });
             }

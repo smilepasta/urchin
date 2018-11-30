@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.setting.SettingActivity">
+
+    <TextView
+        android:id="@+id/tv_language_switch"
+        style="@style/SettingItemIcon"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="@string/language_switch" />
+
+    <include layout="@layout/divide_1" />
+
+    <TextView
+        style="@style/SettingItemIcon"
+        android:text="@string/font_size" />
+
+    <include layout="@layout/divide_1" />
+
+    <TextView
+        style="@style/SettingItemIcon"
+        android:text="@string/clear_cache" />
+
+    <include layout="@layout/divide_1" />
+
+    <TextView
+        style="@style/SettingItemIcon"
+        android:text="@string/version_upgrade" />
+
+    <include layout="@layout/divide_1" />
+
+    <TextView
+        android:id="@+id/tv_about_me"
+        style="@style/SettingItemIcon"
+        android:text="@string/about_me" />
+
+</LinearLayout>

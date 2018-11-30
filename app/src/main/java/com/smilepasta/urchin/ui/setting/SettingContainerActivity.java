@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.ui.demo;
+package com.smilepasta.urchin.ui.setting;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.utils.StringUtil;
 import com.smilepasta.urchin.utils.UIUtil;
 
-public class TryDemoActivity extends TextBarActivity {
+public class SettingContainerActivity extends TextBarActivity {
 
-    public final static String DEMO_KEY_NAME = "name";
-    public final static String DEMO_KEY_VALUE_PROTOBUF = "protobuf";
+    public final static String SETTING_KEY_NAME = "name";
+    public final static String SETTING_KEY_VALUE_PROTOBUF = "language_switch";
 
     @Override
     protected void menuIconAction(Bundle bundle) {
@@ -26,11 +26,11 @@ public class TryDemoActivity extends TextBarActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (intent != null) {
-            String value = intent.getStringExtra(DEMO_KEY_NAME);
+            String value = intent.getStringExtra(SETTING_KEY_NAME);
             if (StringUtil.isNotEmpty(value)) {
-                if (value.equals(DEMO_KEY_VALUE_PROTOBUF)) {
-                    startFragment(new ProtoBufFragment());
-                    setDefaultConfig(R.layout.common_fragment, UIUtil.getString(this, R.string.protobuf_demo));
+                if (value.equals(SETTING_KEY_VALUE_PROTOBUF)) {
+                    startFragment(new LanguageCheckFragment());
+                    setDefaultConfig(R.layout.common_fragment, UIUtil.getString(this, R.string.language_switch));
                 }
             }
         } else {
@@ -39,11 +39,10 @@ public class TryDemoActivity extends TextBarActivity {
     }
 
     public static void start(Activity activity, String keyVal) {
-        Intent intent = new Intent(activity, TryDemoActivity.class);
-        intent.putExtra(TryDemoActivity.DEMO_KEY_NAME, keyVal);
+        Intent intent = new Intent(activity, SettingContainerActivity.class);
+        intent.putExtra(SettingContainerActivity.SETTING_KEY_NAME, keyVal);
         activity.startActivity(intent);
     }
-
 
     private void startFragment(BasicFragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
