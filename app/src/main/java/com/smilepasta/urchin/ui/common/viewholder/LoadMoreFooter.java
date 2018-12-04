@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.utils.UIUtil;
 import com.smilepasta.urchin.widget.recyclerview.CustomRecyclerView;
 
 import java.lang.annotation.Retention;
@@ -141,7 +140,7 @@ public class LoadMoreFooter {
                     showFootView();
                     progressBar.setVisibility(View.INVISIBLE);
                     tvText.setVisibility(View.VISIBLE);
-                    tvText.setText(UIUtil.getString(context, R.string.tips_3));
+                    tvText.setText(context.getString(R.string.tips_3));
                     tvText.setClickable(true);
                     break;
                 case STATE_HIDDEN:

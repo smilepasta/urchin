@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
-import com.smilepasta.urchin.utils.UIUtil;
 
 public class TryHomeActivity extends TextBarActivity {
 
@@ -32,7 +31,7 @@ public class TryHomeActivity extends TextBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDefaultConfig(R.layout.activity_try, UIUtil.getString(this, R.string.try_set));
+        setDefaultConfig(R.layout.activity_try, getString(R.string.try_set));
 
         initView();
     }

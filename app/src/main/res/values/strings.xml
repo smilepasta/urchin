@@ -5,7 +5,16 @@
     <string name="tips_4">暂无数据</string>
     <string name="tips_5">数据请求失败，是否重试？</string>
     <string name="tips_6">敬请期待</string>
-
+    <string name="tips_7">已经是最新的版本</string>
+    <string name="tips_8">发现新版本</string>
+    <string name="tips_9">【模块功能更新】请更新版本后再使用!</string>
+    <string name="tips_10">是否进行版本更新？</string>
+    <string name="tips_11">稍后更新</string>
+    <string name="tips_12">马上更新</string>
+    <string name="tips_13">只有给了APP存储权限才能更新</string>
+    <string name="tips_14">获取【读写存储空间】权限失败，将导致无法升级APP和图片缓存，请到设置页面手动授权。</string>
+    <string name="tips_15">更新应用版本：%s</string>
+    <string name="tips_16">更新文件大小：%s</string>
 
     <string name="app_name">Urchin</string>
     <string name="app_name_test">TUrchin</string>
@@ -24,5 +33,11 @@
     <string name="version_upgrade">版本升级</string>
     <string name="about_me">关于我</string>
     <string name="font_size">字体大小</string>
+    <string name="clean_success">清除成功</string>
+    <string name="open_source_page">打开原网页</string>
+    <string name="share_page">分享</string>
+    <string name="download_success">下载完成</string>
+    <string name="download_failed">下载失败</string>
+    <string name="go_permission_setting">去授权</string>
 
 </resources>

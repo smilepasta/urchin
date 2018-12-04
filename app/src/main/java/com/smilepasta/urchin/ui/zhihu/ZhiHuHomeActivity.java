@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
-import com.smilepasta.urchin.ui.main.MainActivity;
-import com.smilepasta.urchin.utils.UIUtil;
 
 public class ZhiHuHomeActivity extends TextBarActivity {
 
@@ -34,7 +32,7 @@ public class ZhiHuHomeActivity extends TextBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDefaultConfig(R.layout.common_fragment, UIUtil.getString(this, R.string.zihhu_news));
+        setDefaultConfig(R.layout.common_fragment, getString(R.string.zihhu_news));
         initView();
     }
 

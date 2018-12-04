@@ -7,17 +7,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.smilepasta.urchin.Constant;
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.ui.demo.TryHomeActivity;
 import com.smilepasta.urchin.ui.setting.SettingActivity;
 import com.smilepasta.urchin.ui.zhihu.ZhiHuHomeActivity;
 import com.smilepasta.urchin.utils.StringUtil;
-import com.smilepasta.urchin.utils.ToastUtil;
-import com.smilepasta.urchin.utils.UIUtil;
 
 public class MainActivity extends TextBarActivity {
 
@@ -112,7 +108,7 @@ public class MainActivity extends TextBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setChildContentView(R.layout.activity_main);
-        setTitleTextView(UIUtil.getString(this, R.string.app_name));
+        setTitleTextView(getString(R.string.app_name));
 
         initView();
         initData();

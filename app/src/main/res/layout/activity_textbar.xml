@@ -15,7 +15,7 @@
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorPrimary">
 
             <ImageView
                 android:id="@+id/goBack"
@@ -40,6 +40,17 @@
                 android:padding="@dimen/dp_12"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_18sp" />
+
+            <ImageView
+                android:id="@+id/iv_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:padding="@dimen/dp_12"
+                android:src="@mipmap/menu"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

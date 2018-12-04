@@ -11,7 +11,6 @@ import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.utils.DialogUtil;
 import com.smilepasta.urchin.utils.MyContextWrapper;
 import com.smilepasta.urchin.utils.PreUtil;
-import com.smilepasta.urchin.utils.UIUtil;
 
 import java.util.Locale;
 
@@ -68,10 +67,10 @@ public class BasicActivity extends AppCompatActivity {
      */
     public void showRetryDialog(IRetryListener retryListener) {
         DialogUtil.query(this
-                , UIUtil.getString(this, R.string.hint)
-                , UIUtil.getString(this, R.string.tips_5)
-                , UIUtil.getString(this, R.string.cancel)
-                , UIUtil.getString(this, R.string.retry)
+                , getString(R.string.hint)
+                , getString(R.string.tips_5)
+                , getString(R.string.cancel)
+                , getString(R.string.retry)
                 , new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

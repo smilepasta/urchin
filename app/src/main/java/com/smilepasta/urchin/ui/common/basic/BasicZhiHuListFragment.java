@@ -73,7 +73,7 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
     public void showNotDataStatus() {
         statusLayout.setVisibility(View.VISIBLE);
         loadRetryBtn.setVisibility(View.GONE);
-        loadStatusTextView.setText(UIUtil.getString(mContext, R.string.tips_4));
+        loadStatusTextView.setText(getString(R.string.tips_4));
 
         swipeRefreshLayout.setVisibility(View.GONE);
     }
@@ -84,7 +84,7 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
     public void showFailedStatus() {
         statusLayout.setVisibility(View.VISIBLE);
         loadRetryBtn.setVisibility(View.VISIBLE);
-        loadStatusTextView.setText(UIUtil.getString(mContext, R.string.tips_3));
+        loadStatusTextView.setText(getString(R.string.tips_3));
 
         swipeRefreshLayout.setVisibility(View.GONE);
     }

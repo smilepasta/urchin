@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.model.UserProto;
+import com.smilepasta.urchin.bean.UserProto;
 import com.smilepasta.urchin.ui.common.PhotoViewActivity;
 import com.smilepasta.urchin.ui.common.basic.BasicFragment;
 import com.smilepasta.urchin.utils.GlideUtil;

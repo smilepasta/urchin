@@ -10,7 +10,6 @@ import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.BasicFragment;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.utils.StringUtil;
-import com.smilepasta.urchin.utils.UIUtil;
 
 public class TryDemoActivity extends TextBarActivity {
 
@@ -30,7 +29,7 @@ public class TryDemoActivity extends TextBarActivity {
             if (StringUtil.isNotEmpty(value)) {
                 if (value.equals(DEMO_KEY_VALUE_PROTOBUF)) {
                     startFragment(new ProtoBufFragment());
-                    setDefaultConfig(R.layout.common_fragment, UIUtil.getString(this, R.string.protobuf_demo));
+                    setDefaultConfig(R.layout.common_fragment, getString(R.string.protobuf_demo));
                 }
             }
         } else {

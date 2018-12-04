@@ -10,7 +10,6 @@ import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.BasicFragment;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.utils.StringUtil;
-import com.smilepasta.urchin.utils.UIUtil;
 
 public class SettingContainerActivity extends TextBarActivity {
 
@@ -30,7 +29,7 @@ public class SettingContainerActivity extends TextBarActivity {
             if (StringUtil.isNotEmpty(value)) {
                 if (value.equals(SETTING_KEY_VALUE_PROTOBUF)) {
                     startFragment(new LanguageCheckFragment());
-                    setDefaultConfig(R.layout.common_fragment, UIUtil.getString(this, R.string.language_switch));
+                    setDefaultConfig(R.layout.common_fragment, getString(R.string.language_switch));
                 }
             }
         } else {

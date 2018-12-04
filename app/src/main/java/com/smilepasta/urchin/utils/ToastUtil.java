@@ -1,9 +1,8 @@
 package com.smilepasta.urchin.utils;
 
+import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
-
-import com.smilepasta.urchin.UrchinApp;
 
 /**
  * Author:huangxiaoming
@@ -20,10 +19,10 @@ public class ToastUtil {
      *
      * @param msg 显示的内容-字符串
      */
-    public static void showToastBottom(String msg) {
-        if (UrchinApp.getInstance() != null) {
+    public static void showToastBottom(Context context, String msg) {
+        if (context != null) {
             if (toast == null) {
-                toast = Toast.makeText(UrchinApp.getInstance(), msg, Toast.LENGTH_SHORT);
+                toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
             } else {
                 toast.setText(msg);
             }
@@ -39,10 +38,10 @@ public class ToastUtil {
      *
      * @param msg 显示的内容-字符串
      */
-    public static void show(String msg) {
-        if (UrchinApp.getInstance() != null) {
+    public static void show(Context context, String msg) {
+        if (context != null) {
             if (toast == null) {
-                toast = Toast.makeText(UrchinApp.getInstance(), msg, Toast.LENGTH_SHORT);
+                toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
             } else {
                 toast.setText(msg);
             }
@@ -56,10 +55,10 @@ public class ToastUtil {
      *
      * @param msg 显示的内容-字符串
      */
-    public static void showShortToastTop(String msg) {
-        if (UrchinApp.getInstance() != null) {
+    public static void showShortToastTop(Context context, String msg) {
+        if (context != null) {
             if (toast == null) {
-                toast = Toast.makeText(UrchinApp.getInstance(), msg, Toast.LENGTH_SHORT);
+                toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
             } else {
                 toast.setText(msg);
             }

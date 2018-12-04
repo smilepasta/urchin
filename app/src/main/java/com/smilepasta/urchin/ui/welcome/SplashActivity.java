@@ -23,7 +23,6 @@ import com.smilepasta.urchin.utils.AppUtil;
 import com.smilepasta.urchin.utils.DialogUtil;
 import com.smilepasta.urchin.utils.LogUtil;
 import com.smilepasta.urchin.utils.NetworkUtil;
-import com.smilepasta.urchin.utils.UIUtil;
 
 /**
  * Author: huangxiaoming
@@ -47,8 +46,8 @@ public class SplashActivity extends BasicActivity {
 
     private void showNetworkErrorDialog() {
         DialogUtil.query(this
-                , UIUtil.getString(this, R.string.hint)
-                , UIUtil.getString(this, R.string.tips_1)
+                , getString(R.string.hint)
+                , getString(R.string.tips_1)
                 , new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

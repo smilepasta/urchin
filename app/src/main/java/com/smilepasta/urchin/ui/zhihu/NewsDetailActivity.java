@@ -2,6 +2,10 @@ package com.smilepasta.urchin.ui.zhihu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -12,6 +16,9 @@ import android.text.style.URLSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.presenter.implPresenter.INewsDetailPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.INewsDetailView;
@@ -21,10 +28,14 @@ import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.utils.DialogUtil;
 import com.smilepasta.urchin.utils.GlideUtil;
 import com.smilepasta.urchin.utils.StringUtil;
+import com.smilepasta.urchin.utils.ToastUtil;
 import com.smilepasta.urchin.utils.UIUtil;
 import com.smilepasta.urchin.widget.CircleImageView;
+import com.smilepasta.urchin.widget.bubbleview.ContextMenuItem;
+import com.smilepasta.urchin.widget.bubbleview.SHContextMenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsDetailActivity extends TextBarActivity implements INewsDetailView {
 
@@ -35,6 +46,7 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
     private CircleImageView avatarImageView;
     private TextView contentTextView;
     private NoUnderLineSpan noUnderLineSpan;
+    private ZhiHuNewsDetailBean zhiHuNewsDetailBean;
 
     private void initData() {
         newsDetailPresenter = new INewsDetailPresenterImpl(this);
@@ -65,6 +77,7 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
     @Override
     public void getNewsDetail(ZhiHuNewsDetailBean dataBean) {
         if (dataBean != null) {
+            this.zhiHuNewsDetailBean = dataBean;
             if (StringUtil.isNotEmpty(dataBean.getImage())) {
                 GlideUtil.loadImage(dataBean.getImage(), avatarImageView);
                 avatarImageView.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +106,33 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
      * @param bodyHtml
      */
     private void parseBodyHtml(String bodyHtml) {
-        CharSequence charSequence = Html.fromHtml(bodyHtml);
+        Html.ImageGetter imageGetter = new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String source) {
+                final LevelListDrawable drawable = new LevelListDrawable();
+                Glide.with(NewsDetailActivity.this).load(source).asBitmap().into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        if (resource != null) {
+                            BitmapDrawable bitmapDrawable = new BitmapDrawable(resource);
+                            drawable.addLevel(1, 1, bitmapDrawable);
+                            drawable.setBounds(0, 0, resource.getWidth(), resource.getHeight());
+                            drawable.setLevel(1);
+                            CharSequence text = contentTextView.getText();
+                            contentTextView.setText(text);
+                            contentTextView.refreshDrawableState();
+                        }
+                    }
+                });
+                return drawable;
+            }
+        };
+        CharSequence charSequence;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            charSequence = Html.fromHtml(bodyHtml, Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+        } else {
+            charSequence = Html.fromHtml(bodyHtml, imageGetter, null);
+        }
         SpannableStringBuilder builder = new SpannableStringBuilder(charSequence);
         URLSpan[] urlSpans = builder.getSpans(0, charSequence.length(), URLSpan.class);
         for (URLSpan span : urlSpans) {
@@ -120,7 +159,6 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
 
     @Override
     public void showError(String error) {
-
         showRetryDialog(new IRetryListener() {
             @Override
             public void retry() {
@@ -131,7 +169,41 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
 
     @Override
     protected void menuIconAction(Bundle bundle) {
+        if (bundle != null) {
+            String action = bundle.getString(ACTION_TYPE);
+            if (action.equals(ACTION_TYPE_MENU)) {
+                initBubbleView();
+            }
+        }
+    }
 
+    private void initBubbleView() {
+        SHContextMenu shContextMenu = new SHContextMenu(this);
+        List<ContextMenuItem> itemList = new ArrayList<>();
+        itemList.add(new ContextMenuItem(getResources().getDrawable(R.mipmap.pointer), getString(R.string.open_source_page)));
+        itemList.add(new ContextMenuItem(getResources().getDrawable(R.mipmap.pointer), getString(R.string.share_page)));
+        shContextMenu.setItemList(itemList);
+        shContextMenu.setOnItemSelectListener(new SHContextMenu.OnItemSelectListener() {
+            @Override
+            public void onItemSelect(int position) {
+                switchMenu(position);
+            }
+        });
+        shContextMenu.showAsDropDown(titleLayout, 0, 2);
+    }
+
+    private void switchMenu(int position) {
+        switch (position) {
+            case 0://打开原网页
+                String url = zhiHuNewsDetailBean.getShare_url();
+                if (StringUtil.isNotEmpty(url)) {
+                    WebViewActivity.start(this, url);
+                }
+                break;
+            case 1://分享
+                ToastUtil.show(this, getString(R.string.tips_6));
+                break;
+        }
     }
 
     public class NoUnderLineSpan extends URLSpan {
@@ -161,7 +233,7 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDefaultConfig(R.layout.activity_news_detail, "");
-
+        setMenu();
         initView();
         initData();
     }

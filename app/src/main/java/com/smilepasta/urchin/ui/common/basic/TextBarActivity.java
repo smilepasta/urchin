@@ -34,7 +34,8 @@ public abstract class TextBarActivity extends BasicActivity {
     protected NestedScrollView nestedScrollView;
 
     protected final static String ACTION_TYPE = "action_type";
-    protected final static String ACTION_TYPE_SEARCH = "search";
+    protected final static String ACTION_TYPE_MENU = "menu";
+    private ImageView menuImageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +60,9 @@ public abstract class TextBarActivity extends BasicActivity {
         titleLayout.setBackgroundColor(backColor);
     }
 
+    /**
+     * 返回
+     */
     protected void setGoback() {
         goBackImageView = (ImageView) findViewById(R.id.goBack);
         goBackImageView.setVisibility(View.VISIBLE);
@@ -66,6 +70,22 @@ public abstract class TextBarActivity extends BasicActivity {
             @Override
             public void onClick(View view) {
                 finishAfterTransition();
+            }
+        });
+    }
+
+    /**
+     * 菜单
+     */
+    protected void setMenu() {
+        ImageView menuImageView = findViewById(R.id.iv_menu);
+        menuImageView.setVisibility(View.VISIBLE);
+        menuImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(ACTION_TYPE, ACTION_TYPE_MENU);
+                menuIconAction(bundle);
             }
         });
     }

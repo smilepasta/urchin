@@ -15,7 +15,6 @@ import com.smilepasta.urchin.ui.common.basic.BasicZhiHuListFragment;
 import com.smilepasta.urchin.ui.common.listener.IOnItemClickListener;
 import com.smilepasta.urchin.ui.common.viewholder.LoadMoreFooter;
 import com.smilepasta.urchin.utils.DateUtil;
-import com.smilepasta.urchin.utils.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,7 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
                 loadRetryBtn.setVisibility(View.GONE);
                 listView.setVisibility(View.GONE);
                 swipeRefreshLayout.setNestedScrollingEnabled(false);
-                loadStatusTextView.setText(UIUtil.getString(mContext, R.string.tips_4));
+                loadStatusTextView.setText(getString(R.string.tips_4));
             }
             hideSwipeRefreshLayout();
         } else {

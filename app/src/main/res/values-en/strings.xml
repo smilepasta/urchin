@@ -5,6 +5,14 @@
     <string name="tips_4">No data</string>
     <string name="tips_5">The data request failed. Do you want to try again?</string>
     <string name="tips_6">Undeveloped</string>
+    <string name="tips_7">Already the latest version</string>
+    <string name="tips_8">Discover new version</string>
+    <string name="tips_9">[Module function update] Please update the version before using!</string>
+    <string name="tips_10">Whether to update the version？</string>
+    <string name="tips_11">Update later</string>
+    <string name="tips_12">Update now</string>
+    <string name="tips_13">Can only be updated when APP storage permissions are given</string>
+    <string name="tips_14">If the [Read and Write Storage] permission fails, the APP and image cache cannot be upgraded. Please go to the setup page to manually authorize.</string>
 
     <string name="app_name">Urchin</string>
     <string name="app_name_test">TUrchin</string>
@@ -23,5 +31,11 @@
     <string name="version_upgrade">Version upgrade</string>
     <string name="about_me">About me</string>
     <string name="font_size">Font size</string>
+    <string name="clean_success">Clean success</string>
+    <string name="open_source_page">Web page</string>
+    <string name="share_page">Share</string>
+    <string name="download_success">Download success</string>
+    <string name="download_failed">Download failed</string>
+    <string name="go_permission_setting">Setting</string>
 
 </resources>
