@@ -38,5 +38,7 @@
     <string name="download_success">下载完成</string>
     <string name="download_failed">下载失败</string>
     <string name="go_permission_setting">去授权</string>
+    <string name="audio">音频</string>
+    <string name="manual_click">手动点击</string>
 
 </resources>

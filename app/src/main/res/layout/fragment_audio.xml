@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.smilepasta.urchin.ui.demo.AudioFragment">
+
+
+    <com.smilepasta.urchin.widget.PlayPauseView
+        android:id="@+id/ppv_audioview"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_40"
+        android:visibility="gone"
+        app:anim_direction="positive"
+        app:anim_duration="300"
+        app:bg_color="#E0E0E0"
+        app:btn_color="#000000" />
+
+</LinearLayout>

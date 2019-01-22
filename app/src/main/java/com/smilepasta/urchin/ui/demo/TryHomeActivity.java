@@ -23,9 +23,19 @@ public class TryHomeActivity extends TextBarActivity {
         findViewById(R.id.btn_try).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TryDemoActivity.start(TryHomeActivity.this, TryDemoActivity.DEMO_KEY_VALUE_PROTOBUF);
+                startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_PROTOBUF);
             }
         });
+        findViewById(R.id.btn_audio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_AUDIO);
+            }
+        });
+    }
+
+    private void startNextActivity(String keyVal) {
+        TryDemoActivity.start(TryHomeActivity.this,keyVal);
     }
 
     @Override
