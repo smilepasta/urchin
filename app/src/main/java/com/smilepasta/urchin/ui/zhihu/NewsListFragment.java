@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.presenter.implPresenter.IBeforeNewsPresenterImpl;
+import com.smilepasta.urchin.presenter.implPresenter.BeforeNewsPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.IBeforeNewsView;
 import com.smilepasta.urchin.ui.common.basic.BasicZhiHuListFragment;
 import com.smilepasta.urchin.ui.common.listener.IOnItemClickListener;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeNewsView {
 
-    private IBeforeNewsPresenterImpl latestNewsPresenter;
+    private BeforeNewsPresenterImpl latestNewsPresenter;
     private NewsAdapter newsAdapter;
     private List<ZhiHuNewsBean.StoriesBean> newList = new ArrayList<>();
 
@@ -90,17 +90,17 @@ public class NewsListFragment extends BasicZhiHuListFragment implements IBeforeN
     }
 
     @Override
-    public void showError(String error) {
+    public void showError(int code, String error) {
         //加载第一页时出现错误，处理方式
         if (!isInitData) {
-            showFailedStatus();
+            showFailedStatus(code, error);
         } else {
             loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED); // 加载失败了给错误状态
         }
     }
 
     private void initData() {
-        latestNewsPresenter = new IBeforeNewsPresenterImpl(this);
+        latestNewsPresenter = new BeforeNewsPresenterImpl(this);
         doGetLatestNews();
     }
 

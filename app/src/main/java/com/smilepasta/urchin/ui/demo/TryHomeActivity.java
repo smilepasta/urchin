@@ -32,10 +32,16 @@ public class TryHomeActivity extends TextBarActivity {
                 startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_AUDIO);
             }
         });
+        findViewById(R.id.btn_notification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_NOTIFICATION);
+            }
+        });
     }
 
     private void startNextActivity(String keyVal) {
-        TryDemoActivity.start(TryHomeActivity.this,keyVal);
+        TryDemoActivity.start(TryHomeActivity.this, keyVal);
     }
 
     @Override

@@ -5,7 +5,11 @@ import com.smilepasta.urchin.bean.resp.VersionRespBean;
 import com.smilepasta.urchin.http.UrchinHttpManager;
 import com.smilepasta.urchin.http.service.UrchinService;
 import com.smilepasta.urchin.presenter.IVersionInfoPresenter;
+import com.smilepasta.urchin.presenter.base.BasePresenterImpl;
+import com.smilepasta.urchin.presenter.callback.ApiCallback;
+import com.smilepasta.urchin.presenter.callback.ObserverCallBack;
 import com.smilepasta.urchin.presenter.implView.IVersionInfoView;
+import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsDetailBean;
 
 import rx.Observer;
 import rx.Subscription;
@@ -18,11 +22,11 @@ import rx.schedulers.Schedulers;
  * Desc:
  * Version: 1.0
  */
-public class IVersionInfoPresenterImpl extends BasePresenterImpl implements IVersionInfoPresenter {
+public class VersionInfoPresenterImpl extends BasePresenterImpl implements IVersionInfoPresenter {
 
     private IVersionInfoView view;
 
-    public IVersionInfoPresenterImpl(IVersionInfoView view) {
+    public VersionInfoPresenterImpl(IVersionInfoView view) {
         this.view = view;
     }
 
@@ -33,24 +37,22 @@ public class IVersionInfoPresenterImpl extends BasePresenterImpl implements IVer
                 .getVersionInfo(versionReqBean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<VersionRespBean>() {
+                .subscribe(new ObserverCallBack<>(new ApiCallback<VersionRespBean>() {
+                    @Override
+                    public void onSuccess(VersionRespBean model) {
+                        view.getVersionInfo(model);
+                    }
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        view.showError(code, msg);
+                    }
+
                     @Override
                     public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
                         view.hideProgressDialog();
-                        view.showError(e.getMessage());
                     }
-
-                    @Override
-                    public void onNext(VersionRespBean dataBean) {
-                        view.hideProgressDialog();
-                        view.getVersionInfo(dataBean);
-                    }
-                });
+                }));
         addSubscription(s);
 
     }

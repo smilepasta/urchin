@@ -1,12 +1,14 @@
 package com.smilepasta.urchin.presenter.implPresenter;
 
-import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 import com.smilepasta.urchin.http.HttpManager;
 import com.smilepasta.urchin.http.service.ZhiHuService;
 import com.smilepasta.urchin.presenter.IBeforeNewsPresenter;
+import com.smilepasta.urchin.presenter.base.BasePresenterImpl;
+import com.smilepasta.urchin.presenter.callback.ApiCallback;
+import com.smilepasta.urchin.presenter.callback.ObserverCallBack;
 import com.smilepasta.urchin.presenter.implView.IBeforeNewsView;
+import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 
-import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -17,11 +19,11 @@ import rx.schedulers.Schedulers;
  * Desc:
  * Version: 1.0
  */
-public class IBeforeNewsPresenterImpl extends BasePresenterImpl implements IBeforeNewsPresenter {
+public class BeforeNewsPresenterImpl extends BasePresenterImpl implements IBeforeNewsPresenter {
 
     private IBeforeNewsView view;
 
-    public IBeforeNewsPresenterImpl(IBeforeNewsView view) {
+    public BeforeNewsPresenterImpl(IBeforeNewsView view) {
         this.view = view;
     }
 
@@ -32,24 +34,22 @@ public class IBeforeNewsPresenterImpl extends BasePresenterImpl implements IBefo
                 .getBeforeNews(pageDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ZhiHuNewsBean>() {
+                .subscribe(new ObserverCallBack<>(new ApiCallback<ZhiHuNewsBean>() {
+                    @Override
+                    public void onSuccess(ZhiHuNewsBean model) {
+                        view.getBeforeNews(model);
+                    }
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        view.showError(code, msg);
+                    }
+
                     @Override
                     public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
                         view.hideProgressDialog();
-                        view.showError(e.getMessage());
                     }
-
-                    @Override
-                    public void onNext(ZhiHuNewsBean dataBean) {
-                        view.hideProgressDialog();
-                        view.getBeforeNews(dataBean);
-                    }
-                });
+                }));
         addSubscription(s);
     }
 }

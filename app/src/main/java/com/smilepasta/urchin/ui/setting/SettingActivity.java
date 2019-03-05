@@ -16,7 +16,8 @@ import com.smilepasta.urchin.Constant;
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.bean.req.VersionReqBean;
 import com.smilepasta.urchin.bean.resp.VersionRespBean;
-import com.smilepasta.urchin.presenter.implPresenter.IVersionInfoPresenterImpl;
+import com.smilepasta.urchin.http.exception.ExceptionCodeUtil;
+import com.smilepasta.urchin.presenter.implPresenter.VersionInfoPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.IVersionInfoView;
 import com.smilepasta.urchin.ui.common.WebViewActivity;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
@@ -32,7 +33,7 @@ import com.smilepasta.urchin.utils.permission.Permission;
 public class SettingActivity extends TextBarActivity implements IVersionInfoView {
 
     private TextView cacheSizeTextView;
-    private IVersionInfoPresenterImpl versionInfoPresenter;
+    private VersionInfoPresenterImpl versionInfoPresenter;
 
     public final static int RESPONSE_CODE_SUCCESS = 200; //请求成功
     public final static int RESPONSE_CODE_NEW = 300;//当前已是最新的版本，不需要更新了
@@ -75,7 +76,7 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
 
     private void doGetVersionInfo() {
         if (versionInfoPresenter == null) {
-            versionInfoPresenter = new IVersionInfoPresenterImpl(this);
+            versionInfoPresenter = new VersionInfoPresenterImpl(this);
         }
         VersionReqBean versionReqBean = new VersionReqBean();
         versionReqBean.setLanguage(PreUtil.getPrefString(this, Constant.LANGUAGE_TYPE, Constant.LANGUAGE_ZH));
@@ -205,8 +206,8 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
     }
 
     @Override
-    public void showError(String error) {
-        showRetryDialog(new IRetryListener() {
+    public void showError(int code, String error) {
+        showRetryDialog(ExceptionCodeUtil.convertMsg(SettingActivity.this, code, error), new IRetryListener() {
             @Override
             public void retry() {
                 doGetVersionInfo();

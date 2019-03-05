@@ -16,6 +16,16 @@
     <string name="tips_15">更新应用版本：%s</string>
     <string name="tips_16">更新文件大小：%s</string>
 
+    <!-- 错误码对应的提示 -->
+    <string name="tips_1001">网络不可用</string>
+    <string name="tips_1002">请求网络超时</string>
+    <string name="tips_1003">数据解析错误</string>
+    <string name="tips_1004">服务器处理请求出错</string>
+    <string name="tips_1005">服务器无法处理请求</string>
+    <string name="tips_1006">请求被重定向到其他页面</string>
+    <string name="tips_1404">未知错误</string>
+
+
     <string name="app_name">Urchin</string>
     <string name="app_name_test">TUrchin</string>
 
@@ -31,6 +41,7 @@
     <string name="language_switch">语言切换</string>
     <string name="clear_cache">清除缓存</string>
     <string name="version_upgrade">版本升级</string>
+    <string name="version_upgrade_code">版本升级(%s)</string>
     <string name="about_me">关于我</string>
     <string name="font_size">字体大小</string>
     <string name="clean_success">清除成功</string>
@@ -41,5 +52,7 @@
     <string name="go_permission_setting">去授权</string>
     <string name="audio">音频</string>
     <string name="manual_click">手动点击</string>
+    <string name="show_notification">弹出消息</string>
+    <string name="notification_message">通知栏消息</string>
 
 </resources>

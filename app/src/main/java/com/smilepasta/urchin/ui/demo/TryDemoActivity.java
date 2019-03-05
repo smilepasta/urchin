@@ -16,6 +16,7 @@ public class TryDemoActivity extends TextBarActivity {
     public final static String DEMO_KEY_NAME = "name";
     public final static String DEMO_KEY_VALUE_PROTOBUF = "protobuf";
     public final static String DEMO_KEY_VALUE_AUDIO = "audio";
+    public final static String DEMO_KEY_VALUE_NOTIFICATION = "notification";
 
     @Override
     protected void menuIconAction(Bundle bundle) {
@@ -34,6 +35,9 @@ public class TryDemoActivity extends TextBarActivity {
                 }else if(value.equals(DEMO_KEY_VALUE_AUDIO)){
                     startFragment(new AudioFragment());
                     setDefaultConfig(R.layout.common_fragment, getString(R.string.audio));
+                }else if(value.equals(DEMO_KEY_VALUE_NOTIFICATION)){
+                    startFragment(new NotificationFragment());
+                    setDefaultConfig(R.layout.common_fragment, getString(R.string.notification_message));
                 }
             }
         } else {

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
+import com.smilepasta.urchin.http.exception.ExceptionCodeUtil;
 import com.smilepasta.urchin.ui.common.viewholder.LoadMoreFooter;
 import com.smilepasta.urchin.utils.DateUtil;
 import com.smilepasta.urchin.utils.LogUtil;
@@ -81,10 +82,10 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
     /**
      * 加载失败时显示
      */
-    public void showFailedStatus() {
+    public void showFailedStatus(int code, String error) {
         statusLayout.setVisibility(View.VISIBLE);
         loadRetryBtn.setVisibility(View.VISIBLE);
-        loadStatusTextView.setText(getString(R.string.tips_3));
+        loadStatusTextView.setText(ExceptionCodeUtil.convertMsg(mContext, code, error));
 
         swipeRefreshLayout.setVisibility(View.GONE);
     }
@@ -157,19 +158,6 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
         super.onDestroyView();
         if (rootView != null) {
             ((ViewGroup) rootView.getParent()).removeView(rootView);
-        }
-    }
-
-    /**
-     * 显示加载错误
-     */
-    public void showErrorView() {
-        //加载第一页时出现错误，处理方式
-        if (!isInitData) {
-            showFailedStatus();
-//            return;
-        } else {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED); // 加载失败了给错误状态
         }
     }
 

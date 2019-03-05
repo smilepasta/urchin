@@ -1,6 +1,4 @@
-package com.smilepasta.urchin.presenter.implPresenter;
-
-import com.smilepasta.urchin.presenter.BasePresenter;
+package com.smilepasta.urchin.presenter.base;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;

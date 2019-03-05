@@ -9,6 +9,7 @@ import android.view.View;
 import com.smilepasta.urchin.Constant;
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.utils.DialogUtil;
+import com.smilepasta.urchin.utils.LogUtil;
 import com.smilepasta.urchin.utils.MyContextWrapper;
 import com.smilepasta.urchin.utils.PreUtil;
 
@@ -65,10 +66,12 @@ public class BasicActivity extends AppCompatActivity {
     /**
      * 当页面请求失败的时候，提示用户是否重试
      */
-    public void showRetryDialog(IRetryListener retryListener) {
+    public void showRetryDialog(String error,IRetryListener retryListener) {
+        LogUtil.defLog("error ++");
+
         DialogUtil.query(this
                 , getString(R.string.hint)
-                , getString(R.string.tips_5)
+                , error
                 , getString(R.string.cancel)
                 , getString(R.string.retry)
                 , new View.OnClickListener() {

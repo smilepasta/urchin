@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import com.smilepasta.urchin.ui.common.PhotoViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +143,25 @@ public class AppUtil {
             e.printStackTrace();
         }
         return versionName;
+    }
+
+    public static void startPhotoViewActivity(ArrayList<String> imageList, int currentIndex, Activity activity) {
+        Intent intent = new Intent(activity, PhotoViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("type", PhotoViewActivity.IMAGE_PATH_TYPE_URL);
+        bundle.putStringArrayList("list", imageList);
+        //从第几张图片打开的预览图片
+        bundle.putInt("index", currentIndex);
+        intent.putExtras(bundle);
+        activity.startActivity(intent);
+    }
+
+    public static void startPhotoViewActivity(String imgUrl, int currentIndex, Activity activity) {
+        if (StringUtil.isNotEmpty(imgUrl)) {
+            ArrayList<String> imgList = new ArrayList<>();
+            imgList.add(imgUrl);
+            startPhotoViewActivity(imgList, currentIndex, activity);
+        }
     }
 
 }

@@ -55,13 +55,13 @@ public class UpgradeManager {
     // 下载文件的存放目录
     private static final String savePath = FileUtil.getApkPath();
 
-    /* 进度条与通知ui刷新的handler和msg常量 */
-    private ProgressBar progressBar;
-    private TextView titleView, progressView;
+    private ProgressBar progressBar;//进度条
+    private TextView titleTextView;//标题
+    private TextView progressView; //下载进度百分比
+    private TextView fileSizeTextView;//文件总大小
     private Dialog downloadDialog;// 下载对话框
     private int progress;// 下载的数量
     private Thread downLoadThread;// 下载的Thread
-    private TextView fileSizeTextView;
 
     private boolean interceptFlag = false;
 
@@ -97,12 +97,12 @@ public class UpgradeManager {
         downloadDialog = new Dialog(context, R.style.MyDialog);
         View view = LayoutInflater.from(context).inflate(
                 R.layout.download_progress, null);
-        progressBar = (ProgressBar) view.findViewById(R.id.loading_progress);
-        titleView = (TextView) view.findViewById(R.id.dialog_title);
-        progressView = (TextView) view.findViewById(R.id.progress);
+        progressBar = view.findViewById(R.id.loading_progress);
+        titleTextView = view.findViewById(R.id.dialog_title);
+        progressView = view.findViewById(R.id.progress);
         fileSizeTextView = view.findViewById(R.id.tv_file_size);
 
-        titleView.setText(TextUtil.getStringByKeyAndVal(context.getString(R.string.tips_15), versionDetailBean.getVersionCode()));
+        titleTextView.setText(TextUtil.getStringByKeyAndVal(context.getString(R.string.tips_15), versionDetailBean.getVersionCode()));
 
         Window dialogWindow = downloadDialog.getWindow();
         dialogWindow.setGravity(Gravity.CENTER);

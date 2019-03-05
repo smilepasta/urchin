@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.presenter;
+package com.smilepasta.urchin.presenter.base;
 
 /**
  * Author:huangxiaoming

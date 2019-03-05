@@ -1,6 +1,7 @@
 package com.smilepasta.urchin.presenter.implView;
 
 import com.smilepasta.urchin.bean.resp.VersionRespBean;
+import com.smilepasta.urchin.presenter.base.IBaseView;
 
 /**
  * Author: huangxiaoming

@@ -3,10 +3,12 @@ package com.smilepasta.urchin.presenter.implPresenter;
 import com.smilepasta.urchin.http.HttpManager;
 import com.smilepasta.urchin.http.service.ZhiHuService;
 import com.smilepasta.urchin.presenter.INewsDetailPresenter;
+import com.smilepasta.urchin.presenter.base.BasePresenterImpl;
+import com.smilepasta.urchin.presenter.callback.ApiCallback;
+import com.smilepasta.urchin.presenter.callback.ObserverCallBack;
 import com.smilepasta.urchin.presenter.implView.INewsDetailView;
 import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsDetailBean;
 
-import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -17,11 +19,11 @@ import rx.schedulers.Schedulers;
  * Desc:
  * Version: 1.0
  */
-public class INewsDetailPresenterImpl extends BasePresenterImpl implements INewsDetailPresenter {
+public class NewsDetailPresenterImpl extends BasePresenterImpl implements INewsDetailPresenter {
 
     private INewsDetailView view;
 
-    public INewsDetailPresenterImpl(INewsDetailView view) {
+    public NewsDetailPresenterImpl(INewsDetailView view) {
         this.view = view;
     }
 
@@ -32,24 +34,22 @@ public class INewsDetailPresenterImpl extends BasePresenterImpl implements INews
                 .getNewsDetail(detailId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ZhiHuNewsDetailBean>() {
+                .subscribe(new ObserverCallBack<>(new ApiCallback<ZhiHuNewsDetailBean>() {
+                    @Override
+                    public void onSuccess(ZhiHuNewsDetailBean model) {
+                        view.getNewsDetail(model);
+                    }
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        view.showError(code, msg);
+                    }
+
                     @Override
                     public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
                         view.hideProgressDialog();
-                        view.showError(e.getMessage());
                     }
-
-                    @Override
-                    public void onNext(ZhiHuNewsDetailBean dataBean) {
-                        view.hideProgressDialog();
-                        view.getNewsDetail(dataBean);
-                    }
-                });
+                }));
         addSubscription(s);
     }
 }

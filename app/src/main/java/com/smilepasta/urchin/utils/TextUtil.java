@@ -1,9 +1,18 @@
 package com.smilepasta.urchin.utils;
 
+import android.content.Context;
+import android.text.Html;
 import android.text.InputFilter;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.smilepasta.urchin.widget.textview.ImageGetter;
+import com.smilepasta.urchin.widget.textview.ImageTagHandler;
+import com.smilepasta.urchin.widget.textview.UnderLineSpan;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -185,6 +194,39 @@ public class TextUtil {
         DecimalFormat df1 = new DecimalFormat("0.00%");    //##.00%   百分比格式，后面不足2位的用0补齐
         result = df1.format(tempresult);
         return result;
+    }
+
+    /**
+     * 使用Html.fromHtml(String strHtml)转换html标签字符串，fromHtml()方法中会对html标签进行替换，并html标签封装成对应的格式对象。其中每一个<a>标签都会对应一个URLSpan对象。
+     * 获取文本中所有的URLSpan对象，取出URLSpan对象的对应的位置、标识、以及对应的url地址后，使用ClickableSpan对象进行替换，并做自己的超链接逻辑处理。
+     * Textview设置链接可点击，以及点击响应处理属性。
+     *
+     * @param context  上下文
+     * @param textView 设置内容的容器
+     * @param bodyHtml html内容
+     */
+    public static void setHtmlToTextView(Context context, TextView textView, String bodyHtml) {
+        ImageGetter imageGetter = new ImageGetter(context, textView);
+        CharSequence charSequence;
+        ImageTagHandler tagHandler = new ImageTagHandler(context);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            charSequence = Html.fromHtml(bodyHtml, Html.FROM_HTML_MODE_LEGACY, imageGetter, tagHandler);
+        } else {
+            charSequence = Html.fromHtml(bodyHtml, imageGetter, tagHandler);
+        }
+        SpannableStringBuilder builder = new SpannableStringBuilder(charSequence);
+        URLSpan[] urlSpans = builder.getSpans(0, charSequence.length(), URLSpan.class);
+        UnderLineSpan underLineSpan;
+        for (URLSpan span : urlSpans) {
+            int start = builder.getSpanStart(span);
+            int end = builder.getSpanEnd(span);
+            String link = span.getURL();
+            underLineSpan = new UnderLineSpan(context, link);
+            builder.setSpan(underLineSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.removeSpan(span);
+        }
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(builder);
     }
 
 }

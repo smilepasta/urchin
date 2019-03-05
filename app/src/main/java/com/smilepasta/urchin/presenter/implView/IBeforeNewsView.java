@@ -1,5 +1,6 @@
 package com.smilepasta.urchin.presenter.implView;
 
+import com.smilepasta.urchin.presenter.base.IBaseView;
 import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsBean;
 
 /**

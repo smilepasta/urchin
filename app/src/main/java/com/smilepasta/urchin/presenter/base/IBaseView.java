@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.presenter.implView;
+package com.smilepasta.urchin.presenter.base;
 
 /**
  * Author:huangxiaoming
@@ -7,9 +7,10 @@ package com.smilepasta.urchin.presenter.implView;
  * Version:
  */
 public interface IBaseView {
+
     void showProgressDialog();
 
     void hideProgressDialog();
 
-    void showError(String error);
+    void showError(int code, String error);
 }
