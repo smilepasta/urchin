@@ -1,5 +1,7 @@
 package com.smilepasta.urchin.presenter.implPresenter;
 
+import android.content.Context;
+
 import com.smilepasta.urchin.http.HttpManager;
 import com.smilepasta.urchin.http.service.ZhiHuService;
 import com.smilepasta.urchin.presenter.INewsDetailPresenter;
@@ -23,7 +25,8 @@ public class NewsDetailPresenterImpl extends BasePresenterImpl implements INewsD
 
     private INewsDetailView view;
 
-    public NewsDetailPresenterImpl(INewsDetailView view) {
+    public NewsDetailPresenterImpl(INewsDetailView view, Context context) {
+        super(context);
         this.view = view;
     }
 
@@ -34,7 +37,7 @@ public class NewsDetailPresenterImpl extends BasePresenterImpl implements INewsD
                 .getNewsDetail(detailId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ObserverCallBack<>(new ApiCallback<ZhiHuNewsDetailBean>() {
+                .subscribe(new ObserverCallBack<>(context,new ApiCallback<ZhiHuNewsDetailBean>() {
                     @Override
                     public void onSuccess(ZhiHuNewsDetailBean model) {
                         view.getNewsDetail(model);

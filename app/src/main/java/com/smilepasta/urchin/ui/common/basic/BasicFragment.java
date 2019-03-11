@@ -33,7 +33,6 @@ public class BasicFragment extends Fragment {
         super.onStop();
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();

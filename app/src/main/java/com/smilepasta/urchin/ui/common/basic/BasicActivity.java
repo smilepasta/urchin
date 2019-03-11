@@ -67,7 +67,6 @@ public class BasicActivity extends AppCompatActivity {
      * 当页面请求失败的时候，提示用户是否重试
      */
     public void showRetryDialog(String error,IRetryListener retryListener) {
-        LogUtil.defLog("error ++");
 
         DialogUtil.query(this
                 , getString(R.string.hint)

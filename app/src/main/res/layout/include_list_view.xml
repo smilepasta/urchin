@@ -20,11 +20,11 @@
 
     <LinearLayout
         android:id="@+id/ll_status"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_status_text"
@@ -45,4 +45,5 @@
             android:visibility="visible" />
 
     </LinearLayout>
+
 </RelativeLayout>

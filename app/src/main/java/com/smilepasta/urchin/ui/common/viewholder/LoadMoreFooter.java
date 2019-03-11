@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
+import com.smilepasta.urchin.utils.StringUtil;
 import com.smilepasta.urchin.widget.recyclerview.CustomRecyclerView;
 
 import java.lang.annotation.Retention;
@@ -55,11 +56,11 @@ public class LoadMoreFooter {
 
     }
 
-    ProgressBar progressBar;
+    private ProgressBar progressBar;
 
-    TextView tvText;
+    private TextView tvText;
 
-    Context context;
+    private Context context;
 
     @State
     private int state = STATE_DISABLED;
@@ -100,7 +101,7 @@ public class LoadMoreFooter {
     }
 
     @State
-    public int getState() {
+    private int getState() {
         return state;
     }
 
@@ -140,7 +141,7 @@ public class LoadMoreFooter {
                     showFootView();
                     progressBar.setVisibility(View.INVISIBLE);
                     tvText.setVisibility(View.VISIBLE);
-                    tvText.setText(context.getString(R.string.tips_3));
+//                    tvText.setText(context.getString(R.string.tips_3));
                     tvText.setClickable(true);
                     break;
                 case STATE_HIDDEN:
@@ -152,6 +153,13 @@ public class LoadMoreFooter {
         }
     }
 
+    public void setErrorStatus(String error) {
+        setState(LoadMoreFooter.STATE_FAILED); // 加载失败了给错误状态
+        if (StringUtil.isNotEmpty(error)) {
+            tvText.setText(error);
+        }
+    }
+
     private void checkLoadMore() {
         if (getState() == STATE_ENDLESS || getState() == STATE_FAILED) {
             setState(STATE_LOADING);
@@ -159,20 +167,16 @@ public class LoadMoreFooter {
         }
     }
 
-    public void hideFootView() {
+    private void hideFootView() {
         if (footerView.getVisibility() == View.VISIBLE) {
             footerView.setVisibility(View.GONE);
         }
     }
 
-    public void showFootView() {
+    private void showFootView() {
         if (footerView.getVisibility() == View.GONE) {
             footerView.setVisibility(View.VISIBLE);
         }
-    }
-
-    public boolean isHideFootView() {
-        return footerView.getVisibility() == View.GONE;
     }
 
 }

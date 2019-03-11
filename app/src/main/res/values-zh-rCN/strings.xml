@@ -32,6 +32,7 @@
     <string name="cancel">取消</string>
     <string name="hint">提示</string>
     <string name="retry">重试</string>
+    <string name="refresh">刷新</string>
     <string name="zihhu_news">知乎日报</string>
     <string name="try_set">尝试一下</string>
     <string name="protobuf_demo">Protobuf用法</string>

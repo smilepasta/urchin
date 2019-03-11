@@ -1,5 +1,7 @@
 package com.smilepasta.urchin.presenter.implPresenter;
 
+import android.content.Context;
+
 import com.smilepasta.urchin.bean.req.VersionReqBean;
 import com.smilepasta.urchin.bean.resp.VersionRespBean;
 import com.smilepasta.urchin.http.UrchinHttpManager;
@@ -9,9 +11,7 @@ import com.smilepasta.urchin.presenter.base.BasePresenterImpl;
 import com.smilepasta.urchin.presenter.callback.ApiCallback;
 import com.smilepasta.urchin.presenter.callback.ObserverCallBack;
 import com.smilepasta.urchin.presenter.implView.IVersionInfoView;
-import com.smilepasta.urchin.ui.zhihu.ZhiHuNewsDetailBean;
 
-import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -26,7 +26,8 @@ public class VersionInfoPresenterImpl extends BasePresenterImpl implements IVers
 
     private IVersionInfoView view;
 
-    public VersionInfoPresenterImpl(IVersionInfoView view) {
+    public VersionInfoPresenterImpl(IVersionInfoView view, Context context) {
+        super(context);
         this.view = view;
     }
 
@@ -37,7 +38,7 @@ public class VersionInfoPresenterImpl extends BasePresenterImpl implements IVers
                 .getVersionInfo(versionReqBean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ObserverCallBack<>(new ApiCallback<VersionRespBean>() {
+                .subscribe(new ObserverCallBack<>(context, new ApiCallback<VersionRespBean>() {
                     @Override
                     public void onSuccess(VersionRespBean model) {
                         view.getVersionInfo(model);
@@ -54,6 +55,5 @@ public class VersionInfoPresenterImpl extends BasePresenterImpl implements IVers
                     }
                 }));
         addSubscription(s);
-
     }
 }

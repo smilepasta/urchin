@@ -1,5 +1,7 @@
 package com.smilepasta.urchin.presenter.implPresenter;
 
+import android.content.Context;
+
 import com.smilepasta.urchin.http.HttpManager;
 import com.smilepasta.urchin.http.service.ZhiHuService;
 import com.smilepasta.urchin.presenter.IBeforeNewsPresenter;
@@ -23,7 +25,8 @@ public class BeforeNewsPresenterImpl extends BasePresenterImpl implements IBefor
 
     private IBeforeNewsView view;
 
-    public BeforeNewsPresenterImpl(IBeforeNewsView view) {
+    public BeforeNewsPresenterImpl(IBeforeNewsView view, Context context) {
+        super(context);
         this.view = view;
     }
 
@@ -34,7 +37,7 @@ public class BeforeNewsPresenterImpl extends BasePresenterImpl implements IBefor
                 .getBeforeNews(pageDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ObserverCallBack<>(new ApiCallback<ZhiHuNewsBean>() {
+                .subscribe(new ObserverCallBack<>(context, new ApiCallback<ZhiHuNewsBean>() {
                     @Override
                     public void onSuccess(ZhiHuNewsBean model) {
                         view.getBeforeNews(model);

@@ -16,7 +16,6 @@ import com.smilepasta.urchin.Constant;
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.bean.req.VersionReqBean;
 import com.smilepasta.urchin.bean.resp.VersionRespBean;
-import com.smilepasta.urchin.http.exception.ExceptionCodeUtil;
 import com.smilepasta.urchin.presenter.implPresenter.VersionInfoPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.IVersionInfoView;
 import com.smilepasta.urchin.ui.common.WebViewActivity;
@@ -76,7 +75,7 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
 
     private void doGetVersionInfo() {
         if (versionInfoPresenter == null) {
-            versionInfoPresenter = new VersionInfoPresenterImpl(this);
+            versionInfoPresenter = new VersionInfoPresenterImpl(this,this);
         }
         VersionReqBean versionReqBean = new VersionReqBean();
         versionReqBean.setLanguage(PreUtil.getPrefString(this, Constant.LANGUAGE_TYPE, Constant.LANGUAGE_ZH));
@@ -207,7 +206,7 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
 
     @Override
     public void showError(int code, String error) {
-        showRetryDialog(ExceptionCodeUtil.convertMsg(SettingActivity.this, code, error), new IRetryListener() {
+        showRetryDialog(error, new IRetryListener() {
             @Override
             public void retry() {
                 doGetVersionInfo();

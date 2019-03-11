@@ -32,6 +32,7 @@
     <string name="cancel">Cancel</string>
     <string name="hint">Tips</string>
     <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
     <string name="zihhu_news">Zhihu Daily</string>
     <string name="try_set">Try it</string>
     <string name="protobuf_demo">Protobuf usage</string>

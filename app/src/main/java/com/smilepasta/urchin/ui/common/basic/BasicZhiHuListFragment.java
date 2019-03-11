@@ -1,56 +1,75 @@
 package com.smilepasta.urchin.ui.common.basic;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.http.exception.ExceptionCodeUtil;
 import com.smilepasta.urchin.ui.common.viewholder.LoadMoreFooter;
 import com.smilepasta.urchin.utils.DateUtil;
-import com.smilepasta.urchin.utils.LogUtil;
 import com.smilepasta.urchin.utils.UIUtil;
+import com.smilepasta.urchin.widget.recyclerview.BasicRecyclerAdapter;
 import com.smilepasta.urchin.widget.recyclerview.CustomDividerItemDecoration;
 import com.smilepasta.urchin.widget.recyclerview.CustomRecyclerView;
 import com.smilepasta.urchin.widget.recyclerview.WrapContentLinearLayoutManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Author: huangxiaoming
  * Date: 2018/5/9
- * Desc:
+ * Desc: 知乎接口分页需要继承的basic fragment
  * Version: 1.0
  */
-public abstract class BasicZhiHuListFragment extends BasicFragment implements LoadMoreFooter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public abstract class BasicZhiHuListFragment<T> extends BasicFragment implements LoadMoreFooter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
-    public TextView loadStatusTextView;
-    public AppCompatButton loadRetryBtn;
-    public CustomRecyclerView listView;
-    public SwipeRefreshLayout swipeRefreshLayout;
+    //当前fragment所在的layout
+    private View rootView;
+    //状态布局
     public LinearLayout statusLayout;
-
+    //显示没有加载出数据的原因
+    public TextView loadStatusTextView;
+    //重新获取
+    public AppCompatButton loadRetryBtn;
+    //列表
+    public CustomRecyclerView listView;
+    //通用的adapter
+    public BasicRecyclerAdapter<T> basicAdapter;
+    //下拉刷新
+    public SwipeRefreshLayout swipeRefreshLayout;
+    //加载更多的底部view
     public LoadMoreFooter loadMoreFooter;
-    public View rootView;
+    //是否已经初始化数据
     public boolean isInitData = false;
+    //获取第几页的数据（知乎是根据日期来获取的）
     public int pageDate = DateUtil.getPageDate();
+    //列表数据集
+    public List<T> mDataList = new ArrayList<>();
 
     /**
      * 初始化公共的view
      */
-    public void initParentView() {
+    public void initListView() {
         //init listview
         listView = (CustomRecyclerView) rootView.findViewById(R.id.rv_list);
         listView.setLayoutManager(new WrapContentLinearLayoutManager(mContext, LinearLayout.VERTICAL, false));
+
         //init loadmorefooter
         loadMoreFooter = new LoadMoreFooter(mContext, listView, this);
 
         //init swiperefreshlayout
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.srl_refresh);
         swipeRefreshLayout.setColorSchemeColors(
-                UIUtil.getColor(R.color.colorPrimaryDark), UIUtil.getColor(R.color.colorPrimary), UIUtil.getColor(R.color.colorAccent));
+                UIUtil.getColor(R.color.colorPrimaryDark), UIUtil.getColor(R.color.orange_1), UIUtil.getColor(R.color.green_1));
         swipeRefreshLayout.setOnRefreshListener(this);
 
         //init status layout
@@ -68,36 +87,6 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
         statusLayout = rootView.findViewById(R.id.ll_status);
     }
 
-    /**
-     * 暂无数据时显示
-     */
-    public void showNotDataStatus() {
-        statusLayout.setVisibility(View.VISIBLE);
-        loadRetryBtn.setVisibility(View.GONE);
-        loadStatusTextView.setText(getString(R.string.tips_4));
-
-        swipeRefreshLayout.setVisibility(View.GONE);
-    }
-
-    /**
-     * 加载失败时显示
-     */
-    public void showFailedStatus(int code, String error) {
-        statusLayout.setVisibility(View.VISIBLE);
-        loadRetryBtn.setVisibility(View.VISIBLE);
-        loadStatusTextView.setText(ExceptionCodeUtil.convertMsg(mContext, code, error));
-
-        swipeRefreshLayout.setVisibility(View.GONE);
-    }
-
-    /**
-     * 加载成功显示
-     */
-    public void showSuccessStatus() {
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        listView.setVisibility(View.VISIBLE);
-        statusLayout.setVisibility(View.GONE);
-    }
 
     /**
      * 隐藏下拉刷新按钮
@@ -153,19 +142,99 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
         onChildRefresh();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (rootView != null) {
-            ((ViewGroup) rootView.getParent()).removeView(rootView);
+    /**
+     * 处理页面加载成功后
+     *
+     * @param dataList 当前页的数据集
+     */
+    public void processPageLoadSuccess(List<T> dataList) {
+        if (!isInitData) {
+            //初始化页面时获取到了数据做处理
+            basicAdapter.clearData();
+            if (dataList != null && dataList.size() > 0) {
+                //初始化获取到了数据
+                showSuccessStatus(dataList);
+            } else {
+                //初始化没有获取到数据
+                showNotDataStatus();
+            }
+            hideSwipeRefreshLayout();
+        } else {
+            //加载更多页数据处理
+            if (dataList != null) {
+                showMoreDataStatus(dataList);
+            }
+        }
+        pageDate = DateUtil.getDecrementPageDate(pageDate);
+    }
+
+    /**
+     * 加载更多页数据处理
+     *
+     * @param dataList 当前数据集
+     */
+    private void showMoreDataStatus(List<T> dataList) {
+        mDataList.addAll(dataList);
+        basicAdapter.setData(mDataList);
+        hideSwipeRefreshLayout();
+        //判断下一页是否有数据，如果没有数据，就显示加载完成，如果有数据，就显示加载中
+        if (dataList.size() == 0) {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
+        } else {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
         }
     }
 
     /**
-     * 设置加载中状态
+     * 初始化时暂无数据显示
      */
-    public void setLoadingStatus() {
+    public void showNotDataStatus() {
+        statusLayout.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.GONE);
+        swipeRefreshLayout.setNestedScrollingEnabled(false);
+        loadStatusTextView.setText(getString(R.string.tips_4));
+        loadRetryBtn.setText(getString(R.string.refresh));
+    }
+
+    /**
+     * 初始化时获取数据成功
+     *
+     * @param dataList 当前数据集
+     */
+    public void showSuccessStatus(List<T> dataList) {
+        isInitData = true;
+        listView.setVisibility(View.VISIBLE);
+        statusLayout.setVisibility(View.GONE);
+        mDataList.addAll(dataList);
+        basicAdapter.setData(mDataList);
         loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
+    }
+
+    /**
+     * 处理页面加载失败
+     *
+     * @param error 提示给用户的错误信息
+     */
+    public void processPageLoadFailed(String error) {
+        if (!isInitData) {
+            //加载第一页时出现错误的处理方式
+            showFailedStatus(error);
+        } else {
+            //加载更多页时出现错误的处理方式
+            loadMoreFooter.setErrorStatus(error);
+        }
+    }
+
+    /**
+     * 加载失败时显示
+     */
+    public void showFailedStatus(String error) {
+        statusLayout.setVisibility(View.VISIBLE);
+        loadRetryBtn.setVisibility(View.VISIBLE);
+        loadStatusTextView.setText(error);
+        loadRetryBtn.setText(getString(R.string.retry));
+
+        swipeRefreshLayout.setVisibility(View.GONE);
     }
 
     /**
@@ -178,39 +247,46 @@ public abstract class BasicZhiHuListFragment extends BasicFragment implements Lo
      */
     protected abstract void onChildLoadMore();
 
-    protected void checkLoadFinishStatus(int dataSize) {
-        hideSwipeRefreshLayout();
-        if (dataSize == 0) {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
-        } else {
-            setLoadingStatus();
-        }
-        pageDate = DateUtil.getDecrementPageDate(pageDate);
-        LogUtil.defLog(pageDate + "");
-    }
+    /**
+     * 获取布局id
+     *
+     * @return 布局id
+     */
+    protected abstract int getLayoutId();
 
     /**
-     * 判断第一次获取数据是否成功，如果返回false，刚显示无数据
-     *
-     * @param dataSize 后台返回数据的总数
-     * @return
+     * 初始化布局
      */
-    protected boolean isFirstDataGetSuccess(int dataSize) {
-        if (!isInitData) {
-            isInitData = true;
-            if (dataSize > 0) {
-                //如果有数据，就显示初始化成功
-                showSuccessStatus();
-                return true;
-            } else {
-                //如果没有数据，就表示还没初始化，下次到这个页面时，要再更新数据
-                isInitData = false;
-                showNotDataStatus();
-                return false;
-            }
+    protected abstract void initView(View view);
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (rootView == null) {
+            rootView = inflater.inflate(getLayoutId(), container, false);
+            initView(rootView);
         }
-        return true;
+        return rootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (rootView != null) {
+            ((ViewGroup) rootView.getParent()).removeView(rootView);
+        }
+    }
 
 }

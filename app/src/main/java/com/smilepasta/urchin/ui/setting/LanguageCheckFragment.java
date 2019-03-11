@@ -26,7 +26,6 @@ import java.util.ArrayList;
  */
 public class LanguageCheckFragment extends BasicFragment {
 
-
     private ArrayList<LanguageCheckBean> languageCheckList;
 
     public LanguageCheckFragment() {

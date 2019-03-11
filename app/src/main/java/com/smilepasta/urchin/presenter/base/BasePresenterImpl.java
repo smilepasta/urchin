@@ -1,5 +1,9 @@
 package com.smilepasta.urchin.presenter.base;
 
+import android.content.Context;
+
+import java.net.ContentHandler;
+
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -11,7 +15,13 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class BasePresenterImpl implements BasePresenter {
 
+    public Context context;
+
     private CompositeSubscription mCompositeSubscription;
+
+    public BasePresenterImpl(Context context) {
+        this.context = context;
+    }
 
     protected void addSubscription(Subscription s) {
         if (this.mCompositeSubscription == null) {

@@ -73,5 +73,9 @@ public class UIUtil {
         return ContextCompat.getDrawable(getContext(), resId);
     }
 
+    public static String getString(int resId) {
+        return getContext().getString(resId);
+    }
+
 
 }

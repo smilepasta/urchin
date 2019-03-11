@@ -1,15 +1,14 @@
 package com.smilepasta.urchin.ui.setting;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
+import com.smilepasta.urchin.utils.StringUtil;
+import com.smilepasta.urchin.widget.recyclerview.BasicRecyclerAdapter;
 
 import java.util.List;
 
@@ -19,73 +18,53 @@ import java.util.List;
  * Desc:语言选择
  */
 
-public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapter.LanguageViewHolder> {
+public class LanguageListAdapter extends BasicRecyclerAdapter<LanguageCheckBean> {
 
-    private List<LanguageCheckBean> mLanguageList;
-    private Context mContext;
     private int mSelectedPos = -1;
     private boolean onBind;
 
-    public LanguageListAdapter(Context context, List<LanguageCheckBean> mLanguageList) {
-        this.mContext = context;
-        this.mLanguageList = mLanguageList;
+    LanguageListAdapter(Context context, List<LanguageCheckBean> list) {
+        super(context, list, R.layout.item_check);
     }
 
     @Override
-    public LanguageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new LanguageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_check, parent, false));
-    }
+    public void convert(ViewHolder holder, LanguageCheckBean languageCheckBean, int position) {
+        TextView nameTextView = holder.getView(R.id.tv_name);
+        RadioButton selectorRadioButton = holder.getView(R.id.rb_select);
+        if (languageCheckBean != null) {
+            if (StringUtil.isNotEmpty(languageCheckBean.getLanguageName())) {
+                nameTextView.setText(languageCheckBean.getLanguageName());
+            }
 
-    @Override
-    public void onBindViewHolder(LanguageViewHolder holder, final int position) {
-        LanguageCheckBean languageCheckBean = mLanguageList.get(position);
-        holder.mName.setText(languageCheckBean.getLanguageName());
-        if (languageCheckBean.isChecked()) {
-            mSelectedPos = position;
-        }
-        onBind = true;
-        holder.mSelector.setChecked(languageCheckBean.isChecked());
-        onBind = false;
-        holder.mSelector.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (!onBind && mSelectedPos != position) {
-                    //old
-                    mLanguageList.get(mSelectedPos).setChecked(false);
-                    notifyItemChanged(mSelectedPos);
+            if (languageCheckBean.isChecked()) {
+                mSelectedPos = position;
+            }
+            onBind = true;
+            selectorRadioButton.setChecked(languageCheckBean.isChecked());
+            onBind = false;
+            selectorRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (!onBind && mSelectedPos != position) {
+                        //old
+                        mList.get(mSelectedPos).setChecked(false);
+                        notifyItemChanged(mSelectedPos);
 
-                    //new
-                    mSelectedPos = position;
-                    mLanguageList.get(mSelectedPos).setChecked(true);
-                    notifyItemChanged(mSelectedPos);
+                        //new
+                        mSelectedPos = position;
+                        mList.get(mSelectedPos).setChecked(true);
+                        notifyItemChanged(mSelectedPos);
 
-                    mOnLanguageCheckedListener.onLanguageChecked(position);
+                        mOnLanguageCheckedListener.onLanguageChecked(position);
+                    }
                 }
-            }
-        });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.mSelector.setChecked(true);
-            }
-        });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mLanguageList == null ? 0 : mLanguageList.size();
-    }
-
-    public class LanguageViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView mName;
-        public RadioButton mSelector;
-
-        public LanguageViewHolder(View itemView) {
-            super(itemView);
-            mName = itemView.findViewById(R.id.tv_name);
-            mSelector = itemView.findViewById(R.id.rb_select);
+            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectorRadioButton.setChecked(true);
+                }
+            });
         }
     }
 
@@ -93,9 +72,9 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
         void onLanguageChecked(int position);
     }
 
-    private OnLanguageCheckedListener mOnLanguageCheckedListener;
+    private LanguageListAdapter.OnLanguageCheckedListener mOnLanguageCheckedListener;
 
-    public void setOnLanguageCheckedListener(OnLanguageCheckedListener mOnLanguageCheckedListener) {
+    public void setOnLanguageCheckedListener(LanguageListAdapter.OnLanguageCheckedListener mOnLanguageCheckedListener) {
         this.mOnLanguageCheckedListener = mOnLanguageCheckedListener;
     }
 

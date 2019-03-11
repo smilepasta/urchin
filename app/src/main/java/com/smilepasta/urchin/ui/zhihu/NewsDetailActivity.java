@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
-import com.smilepasta.urchin.http.exception.ExceptionCodeUtil;
 import com.smilepasta.urchin.presenter.implPresenter.NewsDetailPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.INewsDetailView;
 import com.smilepasta.urchin.ui.common.PhotoViewActivity;
@@ -36,8 +35,7 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
     private ZhiHuNewsDetailBean zhiHuNewsDetailBean;
 
     private void initData() {
-        LogUtil.defLog("main current id "+android.os.Process.myPid());
-        newsDetailPresenter = new NewsDetailPresenterImpl(this);
+        newsDetailPresenter = new NewsDetailPresenterImpl(this, this);
         Intent intent = getIntent();
         if (intent != null) {
             detailId = intent.getStringExtra(KEY_DETAIL_ID);
@@ -46,7 +44,6 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
             }
         }
     }
-
 
 
     private void doGetNewsDetail() {
@@ -101,13 +98,14 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
     @Override
     public void showError(int code, String error) {
 
-        showRetryDialog(ExceptionCodeUtil.convertMsg(NewsDetailActivity.this, code, error), new IRetryListener() {
+        showRetryDialog(error, new IRetryListener() {
             @Override
             public void retry() {
                 doGetNewsDetail();
             }
         });
     }
+
     @Override
     protected void menuIconAction(Bundle bundle) {
         if (bundle != null) {
