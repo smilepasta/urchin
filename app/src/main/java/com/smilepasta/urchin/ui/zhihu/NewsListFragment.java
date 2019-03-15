@@ -7,7 +7,6 @@ import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.presenter.implPresenter.BeforeNewsPresenterImpl;
 import com.smilepasta.urchin.presenter.implView.IBeforeNewsView;
 import com.smilepasta.urchin.ui.common.basic.BasicZhiHuListFragment;
-import com.smilepasta.urchin.widget.recyclerview.BasicRecyclerAdapter;
 
 /**
  * Author: huangxiaoming
@@ -27,10 +26,10 @@ public class NewsListFragment extends BasicZhiHuListFragment<ZhiHuNewsBean.Stori
     @Override
     protected void initView(View view) {
         initListView();
-        basicAdapter = new NewsAdapter(mContext, mDataList);
-        basicAdapter.setOnItemClickListener(new BasicRecyclerAdapter.OnItemClickListener() {
+        NewsAdapter newsAdapter = new NewsAdapter(mContext, mDataList);
+        newsAdapter.setNewsClickListener(new NewsAdapter.NewsClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(int position) {
                 Intent intent = new Intent(mContext, NewsDetailActivity.class);
                 ZhiHuNewsBean.StoriesBean storiesBean = mDataList.get(position);
                 if (storiesBean != null) {
@@ -38,8 +37,13 @@ public class NewsListFragment extends BasicZhiHuListFragment<ZhiHuNewsBean.Stori
                 }
                 startActivity(intent);
             }
+
+            @Override
+            public void onDeleteClick(int position) {
+                newsAdapter.removeData(position);
+            }
         });
-        setListAdapter(basicAdapter);
+        setListAdapter(newsAdapter);
     }
 
     @Override
@@ -47,8 +51,6 @@ public class NewsListFragment extends BasicZhiHuListFragment<ZhiHuNewsBean.Stori
         latestNewsPresenter = new BeforeNewsPresenterImpl(this, mContext);
         doGetLatestNews();
     }
-
-    private boolean isFirst = true;
 
     /**
      * 获取数据成功

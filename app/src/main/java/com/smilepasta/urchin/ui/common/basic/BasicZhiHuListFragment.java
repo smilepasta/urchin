@@ -113,8 +113,9 @@ public abstract class BasicZhiHuListFragment<T> extends BasicFragment implements
      *
      * @param adapter
      */
-    public void setListAdapter(RecyclerView.Adapter adapter) {
+    public void setListAdapter(BasicRecyclerAdapter<T> adapter) {
         if (adapter != null && listView != null) {
+            this.basicAdapter = adapter;
             listView.setAdapter(adapter);
         }
     }

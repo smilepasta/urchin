@@ -117,6 +117,7 @@ public abstract class BasicRecyclerAdapter<T> extends RecyclerView.Adapter<Basic
 
     /**
      * 设置数据
+     *
      * @param list
      */
     public void setData(List<T> list) {
@@ -133,5 +134,30 @@ public abstract class BasicRecyclerAdapter<T> extends RecyclerView.Adapter<Basic
         notifyDataSetChanged();
     }
 
+
+    /**
+     * 删除单条数据
+     *
+     * @param position
+     */
+    public void removeData(int position) {
+        mList.remove(position);
+        //删除动画
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加单条数据
+     *
+     * @param t
+     * @param position
+     */
+    public void addData(T t, int position) {
+        if (t != null) {
+            mList.add(position, t);
+            notifyItemInserted(position);
+        }
+    }
 
 }

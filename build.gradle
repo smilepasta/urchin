@@ -25,6 +25,12 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+def urchinPropertiesFile = rootProject.file("/urchin.properties")
+
+def urchinProperties = new Properties()
+
+urchinProperties.load(new FileInputStream(urchinPropertiesFile))
+
 ext {
     //编译的版本
     COMPILE_SDK_VERSION = 27
@@ -44,4 +50,17 @@ ext {
     RETROFIT2_VERSION = "2.4.0"
     //rxlifecycle版本
     RXLIFECYCLE_VERSION = "1.0"
+    //人脸核身appkey
+    FACEU_APPKEY = urchinProperties['faceuAppKey']
+    //人脸核身secretKey
+    FACEU_SECRETKEY = urchinProperties['faceuSecretKey']
+    //key别名
+    KEYALIAS = urchinProperties['keyAlias']
+    //key密码
+    KEYPASSWORD = urchinProperties['keyPassword']
+    //密钥文件路径
+    STOREFILE = file(urchinProperties['storeFile'])
+    //密钥的密码
+    STOREPASSWORD = urchinProperties['storePassword']
+
 }

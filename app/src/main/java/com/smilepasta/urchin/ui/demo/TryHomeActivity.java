@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.smilepasta.faceu.FaceuAuthActivity;
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 
@@ -36,6 +37,13 @@ public class TryHomeActivity extends TextBarActivity {
             @Override
             public void onClick(View v) {
                 startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_NOTIFICATION);
+            }
+        });
+        findViewById(R.id.btn_faceu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TryHomeActivity.this, FaceuAuthActivity.class);
+                startActivity(intent);
             }
         });
     }
