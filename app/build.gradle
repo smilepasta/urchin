@@ -4,11 +4,6 @@ def releaseTime() {
     return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
-def urchinPropertiesFile = rootProject.file("/urchin.properties")
-
-def urchinProperties = new Properties()
-
-urchinProperties.load(new FileInputStream(urchinPropertiesFile))
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
@@ -20,6 +15,11 @@ android {
         versionName APP_VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        buildConfigField 'String', 'QINIU_IMAGE_HOST', "${QINIU_IMAGE_HOST}"
+        buildConfigField 'String', 'QINIU_ACCESS_KEY', "${QINIU_ACCESS_KEY}"
+        buildConfigField 'String', 'QINIU_SECRET_KEY', "${QINIU_SECRET_KEY}"
+        buildConfigField 'String', 'QINIU_BUCKET_NAME', "${QINIU_BUCKET_NAME}"
+
     }
 
     signingConfigs {
@@ -27,10 +27,10 @@ android {
 
         }
         release {
-            keyAlias KEYALIAS
-            keyPassword KEYPASSWORD
-            storeFile STOREFILE
-            storePassword STOREPASSWORD
+            keyAlias "${KEY_ALIAS}"
+            keyPassword "${KEY_PASSWORD}"
+            storeFile file("${STORE_FILE}")
+            storePassword "${STORE_PASSWORD}"
         }
     }
 
@@ -127,10 +127,14 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.google.protobuf:protobuf-java:3.6.1'
 
+    implementation 'com.zxy.android:tiny:0.1.0'
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.12'
+
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(path: ':lib-faceu')
+    implementation project(path: ':lib-matisse')
 }

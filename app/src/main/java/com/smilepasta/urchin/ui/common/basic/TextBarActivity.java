@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,7 +33,7 @@ public abstract class TextBarActivity extends BasicActivity {
 
     protected final static String ACTION_TYPE = "action_type";
     protected final static String ACTION_TYPE_MENU = "menu";
-    private ImageView menuImageView;
+    protected final static String ACTION_TYPE_HISTORY = "history";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +83,22 @@ public abstract class TextBarActivity extends BasicActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString(ACTION_TYPE, ACTION_TYPE_MENU);
+                menuIconAction(bundle);
+            }
+        });
+    }
+
+    /**
+     * 历史图片
+     */
+    protected void setHistory() {
+        ImageView historyImageView = findViewById(R.id.iv_history);
+        historyImageView.setVisibility(View.VISIBLE);
+        historyImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(ACTION_TYPE, ACTION_TYPE_HISTORY);
                 menuIconAction(bundle);
             }
         });

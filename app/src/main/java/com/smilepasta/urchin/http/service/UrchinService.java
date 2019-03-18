@@ -1,7 +1,10 @@
 package com.smilepasta.urchin.http.service;
 
+import com.smilepasta.urchin.bean.req.AddImageReqBean;
 import com.smilepasta.urchin.bean.req.VersionReqBean;
+import com.smilepasta.urchin.bean.resp.ImageRespBean;
 import com.smilepasta.urchin.bean.resp.VersionRespBean;
+import com.smilepasta.urchin.bean.resp.base.BaseRespBean;
 import com.smilepasta.urchin.http.UrlParser;
 
 import retrofit2.http.Body;
@@ -19,4 +22,11 @@ public interface UrchinService {
 
     @POST(UrlParser.API_VERSION_UPGRADE)
     Observable<VersionRespBean> getVersionInfo(@Body VersionReqBean versionReqBean);
+
+    @POST(UrlParser.API_ADD_IMAGE)
+    Observable<BaseRespBean> addImage(@Body AddImageReqBean addImageReqBean);
+
+    @GET(UrlParser.API_GET_IMAGE)
+    Observable<ImageRespBean> getImage();
+
 }

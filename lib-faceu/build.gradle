@@ -7,8 +7,8 @@ android {
         minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
 
-        buildConfigField 'String', 'FACEU_APPKEY', FACEU_APPKEY
-        buildConfigField 'String', 'FACEU_SECRETKEY', FACEU_SECRETKEY
+        buildConfigField 'String', 'FACEU_APPKEY', "${FACEU_APPKEY}"
+        buildConfigField 'String', 'FACEU_SECRETKEY', "${FACEU_SECRETKEY}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

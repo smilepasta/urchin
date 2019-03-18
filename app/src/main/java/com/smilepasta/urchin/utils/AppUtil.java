@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -12,7 +13,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.smilepasta.urchin.BuildConfig;
+import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.ui.common.PhotoViewActivity;
+import com.smilepasta.urchin.widget.imageselectview.ImageBean;
+import com.smilepasta.urchin.widget.imageselectview.ImageSelectAdapter;
+import com.smilepasta.urchin.widget.imageselectview.ImageSelectView;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +115,7 @@ public class AppUtil {
 
     /**
      * 隐藏状态栏、导航栏
+     *
      * @param activity
      */
     public static void hideStatusNavigationBar(Activity activity) {
@@ -132,6 +143,7 @@ public class AppUtil {
         }
         return versionCode;
     }
+
     public static String getVersionName(Context context) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
@@ -163,5 +175,6 @@ public class AppUtil {
             startPhotoViewActivity(imgList, currentIndex, activity);
         }
     }
+
 
 }

@@ -122,6 +122,9 @@ public class SplashActivity extends BasicActivity {
                 registerReceiver(networkChangeReceiver, intentFilter);
 
                 checkNetwork();
+
+                nextActivity();
+
             }
         });
     }

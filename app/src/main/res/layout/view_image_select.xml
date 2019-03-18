@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/image_upload"
+            android:textColor="@color/blackSub" />
+
+        <TextView
+            android:id="@+id/tv_image_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/tips_22"
+            android:textColor="@color/text_remark" />
+
+    </LinearLayout>
+
+    <include layout="@layout/divide_1" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_image_select"
+        style="@style/RecyclerView.GridView.Image" />
+
+</LinearLayout>

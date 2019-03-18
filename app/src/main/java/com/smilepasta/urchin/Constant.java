@@ -15,6 +15,10 @@ public class Constant {
     public final static String LANGUAGE_ZH = "zh";//中文
     public final static String LANGUAGE_EN = "en";//英文
 
-    //广播接收者
-    public final static String BROADCAST_RECEIVER_LANGUAGE_CHECK = "broadcast_receiver_language_check";
+    //===============================七牛===========================
+    public final static String QINIU_IMAGE_HOST = BuildConfig.QINIU_IMAGE_HOST;//qiniu 主机
+    public final static String QINIU_ACCESS_KEY = BuildConfig.QINIU_ACCESS_KEY;//qiniu 两个参数
+    public final static String QINIU_SECRET_KEY = BuildConfig.QINIU_SECRET_KEY;
+    public final static String QINIU_BUCKET_NAME = BuildConfig.QINIU_BUCKET_NAME;//qiniu 图片存储在哪个文件夹
+    //===============================七牛===========================
 }

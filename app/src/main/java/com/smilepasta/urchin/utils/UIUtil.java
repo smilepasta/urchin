@@ -1,5 +1,6 @@
 package com.smilepasta.urchin.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -77,5 +78,13 @@ public class UIUtil {
         return getContext().getString(resId);
     }
 
+    /**
+     * 105是每个gridview的item的固定总宽高，通过计算，得出最合适显示的gridview的列数
+     */
+    public static int getGridViewSuitableCount(Activity activity) {
+        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+        int widthDp = UIUtil.px2dip(Float.parseFloat(width + ""));
+        return widthDp / 105;
+    }
 
 }

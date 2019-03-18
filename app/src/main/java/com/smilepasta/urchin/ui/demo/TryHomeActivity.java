@@ -21,35 +21,14 @@ public class TryHomeActivity extends TextBarActivity {
     }
 
     private void initView() {
-        findViewById(R.id.btn_try).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_PROTOBUF);
-            }
+        findViewById(R.id.btn_protobuf).setOnClickListener(v -> ProtoBufActivity.start(TryHomeActivity.this));
+        findViewById(R.id.btn_audio).setOnClickListener(v -> AudioActivity.start(TryHomeActivity.this));
+        findViewById(R.id.btn_notification).setOnClickListener(v -> NotificationActivity.start(TryHomeActivity.this));
+        findViewById(R.id.btn_image_manage).setOnClickListener(v -> ImageSelectActivity.start(TryHomeActivity.this));
+        findViewById(R.id.btn_faceu).setOnClickListener(v -> {
+            Intent intent = new Intent(TryHomeActivity.this, FaceuAuthActivity.class);
+            startActivity(intent);
         });
-        findViewById(R.id.btn_audio).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_AUDIO);
-            }
-        });
-        findViewById(R.id.btn_notification).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startNextActivity(TryDemoActivity.DEMO_KEY_VALUE_NOTIFICATION);
-            }
-        });
-        findViewById(R.id.btn_faceu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TryHomeActivity.this, FaceuAuthActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void startNextActivity(String keyVal) {
-        TryDemoActivity.start(TryHomeActivity.this, keyVal);
     }
 
     @Override

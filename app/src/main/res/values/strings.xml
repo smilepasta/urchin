@@ -20,6 +20,9 @@
     <string name="tips_19">你有一条新的自定义的消息</string>
     <string name="tips_20">弹出默认消息样式</string>
     <string name="tips_21">弹出自定义消息样式</string>
+    <string name="tips_22">最多可拍%s张图片，已拍%s张</string>
+    <string name="tips_23">请选择照片上传</string>
+    <string name="tips_24">正在上传图片……</string>
 
     <!-- 错误码对应的提示 -->
     <string name="tips_1001">网络不可用</string>
@@ -40,7 +43,7 @@
     <string name="retry">重试</string>
     <string name="refresh">刷新</string>
     <string name="zihhu_news">知乎日报</string>
-    <string name="try_set">尝试一下</string>
+    <string name="try_set">Demo</string>
     <string name="protobuf_demo">Protobuf用法</string>
 
     <string name="setting">设置</string>
@@ -63,7 +66,11 @@
     <string name="modify">修改</string>
     <string name="delete">删除</string>
     <string name="image_upload">图片上传</string>
+    <string name="image_manage">图片管理</string>
+    <string name="image_history">图片历史</string>
     <string name="faceu">人脸核身</string>
+    <string name="upload">上传</string>
+    <string name="upload_success">上传完毕</string>
 
 
 </resources>

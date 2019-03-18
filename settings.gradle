@@ -1,1 +1,1 @@
-include ':app', ':lib-faceu'
+include ':app', ':lib-faceu', ':lib-matisse'

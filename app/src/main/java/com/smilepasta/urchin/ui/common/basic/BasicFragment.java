@@ -1,6 +1,7 @@
 package com.smilepasta.urchin.ui.common.basic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.smilepasta.urchin.UrchinApp;
@@ -43,4 +44,8 @@ public class BasicFragment extends Fragment {
         super.onDestroy();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
