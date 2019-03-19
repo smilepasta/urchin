@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.View;
 import android.widget.TextView;
 
 import com.smilepasta.urchin.R;
@@ -46,9 +45,9 @@ public class ProtoBufActivity extends TextBarActivity {
         GlideUtil.loadImage(imgList.get(0), roundImageView);
         GlideUtil.loadImage(imgList.get(1), roundImageView2);
 
-        roundImageView.setOnClickListener(v -> PhotoViewActivity.start(ProtoBufActivity.this, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL, 0));
+        roundImageView.setOnClickListener(v -> PhotoViewActivity.startStr(ProtoBufActivity.this, imgList, 0));
 
-        roundImageView2.setOnClickListener(v -> PhotoViewActivity.start(ProtoBufActivity.this, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL, 1));
+        roundImageView2.setOnClickListener(v -> PhotoViewActivity.startStr(ProtoBufActivity.this, imgList, 1));
     }
 
 

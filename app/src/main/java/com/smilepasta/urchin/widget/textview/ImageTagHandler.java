@@ -9,11 +9,12 @@ import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
 import android.view.View;
 
-import com.smilepasta.urchin.utils.AppUtil;
+import com.smilepasta.urchin.ui.common.PhotoViewActivity;
 import com.smilepasta.urchin.utils.StringUtil;
 
 import org.xml.sax.XMLReader;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -51,7 +52,7 @@ public class ImageTagHandler implements Html.TagHandler {
         private String url;
         private Context context;
 
-        public ClickableImage(Context context, String url) {
+        ClickableImage(Context context, String url) {
             this.context = context;
             this.url = url;
         }
@@ -60,7 +61,9 @@ public class ImageTagHandler implements Html.TagHandler {
         public void onClick(View widget) {
             // 进行图片点击之后的处理
             if (StringUtil.isNotEmpty(url)) {
-                AppUtil.startPhotoViewActivity(url, 0, (Activity) context);
+                ArrayList<String> imgList = new ArrayList<>();
+                imgList.add(url);
+                PhotoViewActivity.startStr((Activity) context, imgList, 0);
             }
         }
     }

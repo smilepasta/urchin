@@ -157,24 +157,4 @@ public class AppUtil {
         return versionName;
     }
 
-    public static void startPhotoViewActivity(ArrayList<String> imageList, int currentIndex, Activity activity) {
-        Intent intent = new Intent(activity, PhotoViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("type", PhotoViewActivity.IMAGE_PATH_TYPE_URL);
-        bundle.putStringArrayList("list", imageList);
-        //从第几张图片打开的预览图片
-        bundle.putInt("index", currentIndex);
-        intent.putExtras(bundle);
-        activity.startActivity(intent);
-    }
-
-    public static void startPhotoViewActivity(String imgUrl, int currentIndex, Activity activity) {
-        if (StringUtil.isNotEmpty(imgUrl)) {
-            ArrayList<String> imgList = new ArrayList<>();
-            imgList.add(imgUrl);
-            startPhotoViewActivity(imgList, currentIndex, activity);
-        }
-    }
-
-
 }

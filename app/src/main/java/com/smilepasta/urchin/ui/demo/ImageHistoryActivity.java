@@ -4,7 +4,8 @@ package com.smilepasta.urchin.ui.demo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 
 import com.smilepasta.urchin.R;
 import com.smilepasta.urchin.bean.resp.ImageRespBean;
@@ -13,6 +14,10 @@ import com.smilepasta.urchin.presenter.implView.IGetImageView;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.utils.DialogUtil;
 import com.smilepasta.urchin.utils.ToastUtil;
+import com.smilepasta.urchin.widget.recyclerview.WrapContentLinearLayoutManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: huangxiaoming
@@ -22,8 +27,8 @@ import com.smilepasta.urchin.utils.ToastUtil;
  */
 public class ImageHistoryActivity extends TextBarActivity implements IGetImageView {
 
-
-    private TextView imageTextView;
+    private List<ImageRespBean.DataBean.ImageArrBean> dataList = new ArrayList<>();
+    private ImageHistoryAdapter imageHistoryAdapter;
 
     @Override
     protected void menuIconAction(Bundle bundle) {
@@ -31,7 +36,10 @@ public class ImageHistoryActivity extends TextBarActivity implements IGetImageVi
     }
 
     private void initView() {
-        imageTextView = findViewById(R.id.tv_image);
+        RecyclerView imageHistoryRecyclerView = findViewById(R.id.rv_image_history);
+        imageHistoryRecyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayout.VERTICAL, false));
+        imageHistoryAdapter = new ImageHistoryAdapter(this, dataList);
+        imageHistoryRecyclerView.setAdapter(imageHistoryAdapter);
     }
 
     private void initData() {
@@ -41,7 +49,13 @@ public class ImageHistoryActivity extends TextBarActivity implements IGetImageVi
 
     @Override
     public void getImage(ImageRespBean imageRespBean) {
-        imageTextView.setText(imageRespBean.toString());
+        if (imageRespBean != null
+                && imageRespBean.getData() != null
+                && imageRespBean.getData().getImageArr() != null
+                && imageRespBean.getData().getImageArr().size() > 0) {
+            dataList = imageRespBean.getData().getImageArr();
+            imageHistoryAdapter.setData(dataList);
+        }
     }
 
     @Override

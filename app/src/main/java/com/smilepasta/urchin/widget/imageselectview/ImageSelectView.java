@@ -2,9 +2,7 @@ package com.smilepasta.urchin.widget.imageselectview;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -70,7 +68,7 @@ public class ImageSelectView extends LinearLayout {
     public void initView(Activity activity) {
         this.activity = activity;
         imageSelectAdapter = new ImageSelectAdapter(activity);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), UIUtil.getGridViewSuitableCount((Activity) getContext())));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         Uri uri = UIUtil.idToUri(R.mipmap.ic_add_img);
         imageList.add(new ImageBean(uri, ImageSelectAdapter.DEFAULT_ADD_IMAGE));
         imageSelectAdapter.setData(imageList);
@@ -252,14 +250,7 @@ public class ImageSelectView extends LinearLayout {
         for (ImageBean image : imageList) {
             uriList.add(image.getUri());
         }
-        Intent intent = new Intent(activity, PhotoViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("type", PhotoViewActivity.IMAGE_PATH_TYPE_URI);
-        bundle.putParcelableArrayList("list", uriList);
-        //从第几张图片打开的预览图片
-        bundle.putInt("index", currentIndex);
-        intent.putExtras(bundle);
-        activity.startActivity(intent);
+        PhotoViewActivity.startUri(activity, uriList, currentIndex);
     }
 
 

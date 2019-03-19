@@ -72,7 +72,7 @@ public class NewsDetailActivity extends TextBarActivity implements INewsDetailVi
                     public void onClick(View v) {
                         ArrayList<String> imgList = new ArrayList<>();
                         imgList.add(dataBean.getImage());
-                        PhotoViewActivity.start(NewsDetailActivity.this, imgList, PhotoViewActivity.IMAGE_PATH_TYPE_URL, 0);
+                        PhotoViewActivity.startStr(NewsDetailActivity.this, imgList, 0);
                     }
                 });
             }

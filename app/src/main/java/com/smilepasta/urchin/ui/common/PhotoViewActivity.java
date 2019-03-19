@@ -172,11 +172,35 @@ public class PhotoViewActivity extends AppCompatActivity {
         }
     }
 
-    public static void start(Activity activity, ArrayList<String> imgList, String imgType, int beginIndex) {
+    /**
+     * 预览图片时，传过来的是字符串集合
+     *
+     * @param activity
+     * @param imgList    图片集合
+     * @param beginIndex 打开第几张图片的位置
+     */
+    public static void startStr(Activity activity, ArrayList<String> imgList, int beginIndex) {
         Intent intent = new Intent(activity, PhotoViewActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString(IMAGE_PATH_TYPE, imgType);
+        bundle.putString(IMAGE_PATH_TYPE, IMAGE_PATH_TYPE_URL);
         bundle.putStringArrayList(IMAGE_PATH_LIST, imgList);
+        bundle.putInt(IMAGE_LIST_BEGIN_INDEX, beginIndex);
+        intent.putExtras(bundle);
+        activity.startActivity(intent);
+    }
+
+    /**
+     * 预览图片时，传过来的是uri集合
+     *
+     * @param activity
+     * @param imgList    图片集合
+     * @param beginIndex 打开第几张图片的位置
+     */
+    public static void startUri(Activity activity, ArrayList<Uri> imgList, int beginIndex) {
+        Intent intent = new Intent(activity, PhotoViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(IMAGE_PATH_TYPE, IMAGE_PATH_TYPE_URI);
+        bundle.putParcelableArrayList(IMAGE_PATH_LIST, imgList);
         bundle.putInt(IMAGE_LIST_BEGIN_INDEX, beginIndex);
         intent.putExtras(bundle);
         activity.startActivity(intent);

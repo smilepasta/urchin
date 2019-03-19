@@ -43,7 +43,7 @@
     <string name="retry">重试</string>
     <string name="refresh">刷新</string>
     <string name="zihhu_news">知乎日报</string>
-    <string name="try_set">Demo</string>
+    <string name="try_set">尝试一下</string>
     <string name="protobuf_demo">Protobuf用法</string>
 
     <string name="setting">设置</string>
@@ -67,7 +67,7 @@
     <string name="delete">删除</string>
     <string name="image_upload">图片上传</string>
     <string name="image_manage">图片管理</string>
-    <string name="image_history">图片历史</string>
+    <string name="image_history">图片浏览</string>
     <string name="faceu">人脸核身</string>
     <string name="upload">上传</string>
     <string name="upload_success">上传完毕</string>
