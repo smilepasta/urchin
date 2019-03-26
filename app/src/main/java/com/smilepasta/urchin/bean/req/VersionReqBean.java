@@ -9,26 +9,26 @@ package com.smilepasta.urchin.bean.req;
 public class VersionReqBean {
 
     /**
-     * versionCode : 10
-     * language : zh
+     * version_code : 100
+     * platform_code : android
      */
 
-    private int versionCode;
-    private String language;
+    private int version_code;
+    private String platform_code;
 
-    public int getVersionCode() {
-        return versionCode;
+    public int getVersion_code() {
+        return version_code;
     }
 
-    public void setVersionCode(int versionCode) {
-        this.versionCode = versionCode;
+    public void setVersion_code(int version_code) {
+        this.version_code = version_code;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getPlatform_code() {
+        return platform_code;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setPlatform_code(String platform_code) {
+        this.platform_code = platform_code;
     }
 }

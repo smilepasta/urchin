@@ -3,12 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.smilepasta.urchin.ui.demo.ImageSelectActivity">
+    tools:context="com.smilepasta.urchin.ui.photo.ImageSelectActivity">
 
     <com.smilepasta.urchin.widget.imageselectview.ImageSelectView
         android:id="@+id/image_select_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <include layout="@layout/divide_1" />
+
+    <LinearLayout
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <com.smilepasta.urchin.widget.ClearableEditText
+            android:id="@+id/et_title"
+            style="@style/EditText.Remark"
+            android:maxLength="2000" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="wrap_content"

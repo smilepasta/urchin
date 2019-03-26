@@ -131,6 +131,11 @@ public class AppUtil {
         }
     }
 
+    /**
+     * 版本号
+     * @param context
+     * @return
+     */
     public static int getVersionCode(Context context) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
@@ -144,6 +149,11 @@ public class AppUtil {
         return versionCode;
     }
 
+    /**
+     * 版本名
+     * @param context
+     * @return
+     */
     public static String getVersionName(Context context) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;

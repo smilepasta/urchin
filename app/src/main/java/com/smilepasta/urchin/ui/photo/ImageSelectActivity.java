@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.ui.demo;
+package com.smilepasta.urchin.ui.photo;
 
 
 import android.app.Activity;
@@ -16,6 +16,7 @@ import com.smilepasta.urchin.utils.DialogUtil;
 import com.smilepasta.urchin.utils.StringUtil;
 import com.smilepasta.urchin.utils.ToastUtil;
 import com.smilepasta.urchin.utils.UIUtil;
+import com.smilepasta.urchin.widget.ClearableEditText;
 import com.smilepasta.urchin.widget.imageselectview.ImageSelectAdapter;
 import com.smilepasta.urchin.widget.imageselectview.ImageSelectView;
 import com.zhihu.matisse.Matisse;
@@ -32,8 +33,11 @@ public class ImageSelectActivity extends TextBarActivity implements IAddImageVie
 
     private ImageSelectView imageSelectView;
     private AddImagePresenterImpl addImagePresenter;
+    private ClearableEditText titleEditText;
 
     private void initView() {
+        titleEditText = findViewById(R.id.et_title);
+
         imageSelectView = findViewById(R.id.image_select_layout);
         findViewById(R.id.btn_upload).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,12 +47,15 @@ public class ImageSelectActivity extends TextBarActivity implements IAddImageVie
         });
 
         imageSelectView.initView(this);
-        imageSelectView.setImageUploadQiniuListener(new ImageSelectView.IImageUploadQiniuListener() {
+        imageSelectView.setImageUploadQiniuListener(new ImageSelectView.IImageUploadQiniuListener()
+
+        {
             @Override
             public void uploadSuccess(String imageUrls) {
                 if (StringUtil.isNotEmpty(imageUrls)) {
                     AddImageReqBean addImageReqBean = new AddImageReqBean();
-                    addImageReqBean.setImageUrls(imageUrls);
+                    addImageReqBean.setImages(imageUrls);
+                    addImageReqBean.setDesc(titleEditText.getText().toString().trim());
                     addImagePresenter.addImage(addImageReqBean);
                 }
             }
@@ -66,11 +73,20 @@ public class ImageSelectActivity extends TextBarActivity implements IAddImageVie
     }
 
     private void uploadImage() {
+        if (!StringUtil.isNotEmpty(titleEditText.getText().toString().trim())) {
+            ToastUtil.show(ImageSelectActivity.this, UIUtil.getString(R.string.tips_25));
+            return;
+        }
         if (imageSelectView.isNoPresenceImage()) {
             ToastUtil.show(ImageSelectActivity.this, UIUtil.getString(R.string.tips_23));
             return;
         }
-        imageSelectView.uploadImage();
+        showConfirmSubmitDialog(new IConfirmSubmitLisener() {
+            @Override
+            public void confirmSubmit() {
+                imageSelectView.uploadImage();
+            }
+        });
     }
 
     @Override
@@ -89,12 +105,6 @@ public class ImageSelectActivity extends TextBarActivity implements IAddImageVie
 
     @Override
     protected void menuIconAction(Bundle bundle) {
-        if (bundle != null) {
-            String action = bundle.getString(ACTION_TYPE);
-            if (action.equals(ACTION_TYPE_HISTORY)) {
-                ImageHistoryActivity.start(this);
-            }
-        }
     }
 
     public static void start(Activity activity) {
@@ -125,8 +135,7 @@ public class ImageSelectActivity extends TextBarActivity implements IAddImageVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDefaultConfig(R.layout.activity_image_select, getString(R.string.image_manage));
-        setHistory();
+        setDefaultConfig(R.layout.activity_image_select, getString(R.string.image_upload));
         initView();
         initData();
     }

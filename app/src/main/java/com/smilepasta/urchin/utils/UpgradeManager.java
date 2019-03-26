@@ -44,7 +44,7 @@ import okhttp3.Response;
 public class UpgradeManager {
 
     private Context context;
-    private VersionRespBean.VersionDetailBean versionDetailBean;
+    private VersionRespBean.DataBean versionDetailBean;
     // 下载中
     private static final int UPDATEING = 1;
     // 下载完成
@@ -88,7 +88,7 @@ public class UpgradeManager {
         }
     };
 
-    public UpgradeManager(Activity context, VersionRespBean.VersionDetailBean versionDetailBean) {
+    public UpgradeManager(Activity context, VersionRespBean.DataBean versionDetailBean) {
         this.versionDetailBean = versionDetailBean;
         this.context = context;
     }
@@ -102,7 +102,7 @@ public class UpgradeManager {
         progressView = view.findViewById(R.id.progress);
         fileSizeTextView = view.findViewById(R.id.tv_file_size);
 
-        titleTextView.setText(TextUtil.getStringByKeyAndVal(context.getString(R.string.tips_15), versionDetailBean.getVersionCode()));
+        titleTextView.setText(TextUtil.getStringByKeyAndVal(context.getString(R.string.tips_15), versionDetailBean.getVersion_name()));
 
         Window dialogWindow = downloadDialog.getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
@@ -117,7 +117,7 @@ public class UpgradeManager {
         @Override
         public void run() {
             try {
-                URL url = new URL(versionDetailBean.getApkUrl());
+                URL url = new URL(versionDetailBean.getDownload_url());
                 Request request = new Request.Builder().url(url).build();
                 OkHttpClient okHttpClient = new OkHttpClient();
                 Call call = okHttpClient.newCall(request);
@@ -142,7 +142,7 @@ public class UpgradeManager {
                         if (!file.exists()) {
                             file.mkdir();
                         }
-                        String apkFile = savePath + "/" + getUrlApk(versionDetailBean.getApkUrl());
+                        String apkFile = savePath + "/" + getUrlApk(versionDetailBean.getDownload_url());
                         File ApkFile = new File(apkFile);
                         // 判断文件是否存在，不存在则创建
                         if (!ApkFile.exists()) {
@@ -186,7 +186,7 @@ public class UpgradeManager {
 
     private void installAPK() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        File apkFile = new File(savePath + "/" + getUrlApk(versionDetailBean.getApkUrl()));
+        File apkFile = new File(savePath + "/" + getUrlApk(versionDetailBean.getDownload_url()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Uri contentUri = GenericFileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", apkFile);

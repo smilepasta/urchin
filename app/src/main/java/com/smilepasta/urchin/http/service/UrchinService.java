@@ -1,6 +1,7 @@
 package com.smilepasta.urchin.http.service;
 
 import com.smilepasta.urchin.bean.req.AddImageReqBean;
+import com.smilepasta.urchin.bean.req.PageReqBean;
 import com.smilepasta.urchin.bean.req.VersionReqBean;
 import com.smilepasta.urchin.bean.resp.ImageRespBean;
 import com.smilepasta.urchin.bean.resp.VersionRespBean;
@@ -26,7 +27,7 @@ public interface UrchinService {
     @POST(UrlParser.API_ADD_IMAGE)
     Observable<BaseRespBean> addImage(@Body AddImageReqBean addImageReqBean);
 
-    @GET(UrlParser.API_GET_IMAGE)
-    Observable<ImageRespBean> getImage();
+    @POST(UrlParser.API_GET_IMAGE)
+    Observable<ImageRespBean> getImage(@Body PageReqBean pageReqBean);
 
 }

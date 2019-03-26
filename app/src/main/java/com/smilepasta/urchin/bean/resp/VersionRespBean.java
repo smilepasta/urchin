@@ -1,79 +1,112 @@
 package com.smilepasta.urchin.bean.resp;
 
+import com.smilepasta.urchin.bean.resp.base.BaseRespBean;
+
 /**
  * Author: huangxiaoming
  * Date: 2018/12/4
  * Desc:
  * Version: 1.0
  */
-public class VersionRespBean {
+public class VersionRespBean extends BaseRespBean{
 
     /**
-     * code : 200
-     * data : {"tips":"发现新版本，请更新","apkUrl":"http://smilepasta.com","isFocreUpdate":1}
+     * data : {"id":1,"download_url":"https://cdn.smilepasta.com/urchin_v1.0.2_100_20181204_debug.apk","is_focre_update":null,"version_name":"1.0.1","version_code":100,"platform_code":"android","createdAt":"2019-03-25T06:22:53.000Z","updatedAt":"2019-03-25T06:22:53.000Z"}
      */
 
-    private int code;
-    private VersionDetailBean data;
+    private DataBean data;
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public VersionDetailBean getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(VersionDetailBean data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
-    public static class VersionDetailBean {
+    public static class DataBean {
         /**
-         * tips : 发现新版本，请更新
-         * apkUrl : http://smilepasta.com
-         * isFocreUpdate : 1
+         * id : 1
+         * download_url : https://cdn.smilepasta.com/urchin_v1.0.2_100_20181204_debug.apk
+         * is_focre_update : null
+         * version_name : 1.0.1
+         * version_code : 100
+         * platform_code : android
+         * createdAt : 2019-03-25T06:22:53.000Z
+         * updatedAt : 2019-03-25T06:22:53.000Z
          */
 
-        private String tips;
-        private String apkUrl;
-        private String versionCode;
-        private int isFocreUpdate;
+        private int id;
+        private String download_url;
+        private boolean is_focre_update;
+        private String version_name;
+        private int version_code;
+        private String platform_code;
+        private String createdAt;
+        private String updatedAt;
 
-        public String getVersionCode() {
-            return versionCode;
+        public int getId() {
+            return id;
         }
 
-        public void setVersionCode(String versionCode) {
-            this.versionCode = versionCode;
+        public void setId(int id) {
+            this.id = id;
         }
 
-        public String getTips() {
-            return tips;
+        public String getDownload_url() {
+            return download_url;
         }
 
-        public void setTips(String tips) {
-            this.tips = tips;
+        public void setDownload_url(String download_url) {
+            this.download_url = download_url;
         }
 
-        public String getApkUrl() {
-            return apkUrl;
+        public boolean getIs_focre_update() {
+            return is_focre_update;
         }
 
-        public void setApkUrl(String apkUrl) {
-            this.apkUrl = apkUrl;
+        public void setIs_focre_update(boolean is_focre_update) {
+            this.is_focre_update = is_focre_update;
         }
 
-        public int getIsFocreUpdate() {
-            return isFocreUpdate;
+        public String getVersion_name() {
+            return version_name;
         }
 
-        public void setIsFocreUpdate(int isFocreUpdate) {
-            this.isFocreUpdate = isFocreUpdate;
+        public void setVersion_name(String version_name) {
+            this.version_name = version_name;
+        }
+
+        public int getVersion_code() {
+            return version_code;
+        }
+
+        public void setVersion_code(int version_code) {
+            this.version_code = version_code;
+        }
+
+        public String getPlatform_code() {
+            return platform_code;
+        }
+
+        public void setPlatform_code(String platform_code) {
+            this.platform_code = platform_code;
+        }
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
         }
     }
 }

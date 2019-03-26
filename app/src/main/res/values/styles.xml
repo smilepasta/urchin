@@ -36,6 +36,13 @@
         <item name="android:lines">1</item>
     </style>
 
+    <!-- 两行 -->
+    <style name="SingleLine2" parent="Control">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:lines">2</item>
+    </style>
+
 
     <!-- popupwindow style -->
     <style name="PopupAnimation" mce_bogus="1" parent="android:Animation">
@@ -64,6 +71,21 @@
         <item name="android:background">@color/white</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="EditText.Remark" parent="Control">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_100</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:layout_marginRight">@dimen/dp_10</item>
+        <item name="android:background">@null</item>
+        <item name="android:gravity">left|top</item>
+        <item name="android:hint">@string/tips_25</item>
+        <item name="android:textColor">@color/blackSub</item>
+        <item name="android:textSize">@dimen/font_14sp</item>
+        <item name="android:maxLength">500</item>
+        <item name="android:drawablePadding">@dimen/dp_8</item>
     </style>
 
 

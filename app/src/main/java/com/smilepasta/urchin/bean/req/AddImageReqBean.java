@@ -8,15 +8,24 @@ package com.smilepasta.urchin.bean.req;
  */
 public class AddImageReqBean {
     /**
-     * {"imageUrls":"cdn.smilepasta.com/text.png"}
+     * {"images":"cdn.smilepasta.com/text.png","desc":"图片描述"}
      */
-    private String imageUrls;
+    private String images;
+    private String desc;
 
-    public String getImageUrls() {
-        return imageUrls;
+    public String getImages() {
+        return images;
     }
 
-    public void setImageUrls(String imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

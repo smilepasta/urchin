@@ -1,4 +1,4 @@
-package com.smilepasta.urchin.ui.demo;
+package com.smilepasta.urchin.ui.photo;
 
 import android.content.Context;
 import android.widget.ImageView;

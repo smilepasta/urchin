@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- 震动权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <application
         android:name=".UrchinApp"
@@ -61,8 +64,9 @@
         <activity android:name=".ui.demo.ProtoBufActivity" />
         <activity android:name=".ui.demo.NotificationActivity" />
         <activity android:name=".ui.demo.AudioActivity" />
-        <activity android:name=".ui.demo.ImageSelectActivity" />
-        <activity android:name=".ui.demo.ImageHistoryActivity" />
+        <activity android:name=".ui.photo.ImageSelectActivity" />
+        <activity android:name=".ui.photo.ImageHomeActivity" />
+        <activity android:name=".ui.photo.ImageDetailActivity" />
     </application>
 
 </manifest>

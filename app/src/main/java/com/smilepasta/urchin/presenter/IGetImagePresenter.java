@@ -1,6 +1,7 @@
 package com.smilepasta.urchin.presenter;
 
 import com.smilepasta.urchin.bean.req.AddImageReqBean;
+import com.smilepasta.urchin.bean.req.PageReqBean;
 
 /**
  * Author: huangxiaoming
@@ -9,5 +10,5 @@ import com.smilepasta.urchin.bean.req.AddImageReqBean;
  * Version: 1.0
  */
 public interface IGetImagePresenter {
-    void getImage();
+    void getImage(PageReqBean pageReqBean);
 }

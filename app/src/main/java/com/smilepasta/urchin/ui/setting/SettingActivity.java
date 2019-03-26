@@ -23,7 +23,6 @@ import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
 import com.smilepasta.urchin.utils.AppUtil;
 import com.smilepasta.urchin.utils.CleanDataUtil;
 import com.smilepasta.urchin.utils.DialogUtil;
-import com.smilepasta.urchin.utils.PreUtil;
 import com.smilepasta.urchin.utils.StringUtil;
 import com.smilepasta.urchin.utils.ToastUtil;
 import com.smilepasta.urchin.utils.UpgradeManager;
@@ -36,7 +35,7 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
 
     public final static int RESPONSE_CODE_SUCCESS = 200; //请求成功
     public final static int RESPONSE_CODE_NEW = 300;//当前已是最新的版本，不需要更新了
-    private VersionRespBean.VersionDetailBean versionDetailBean;
+    private VersionRespBean.DataBean versionDetailBean;
     private boolean isFindNewVersion = false;
 
     @Override
@@ -75,11 +74,11 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
 
     private void doGetVersionInfo() {
         if (versionInfoPresenter == null) {
-            versionInfoPresenter = new VersionInfoPresenterImpl(this,this);
+            versionInfoPresenter = new VersionInfoPresenterImpl(this, this);
         }
         VersionReqBean versionReqBean = new VersionReqBean();
-        versionReqBean.setLanguage(PreUtil.getPrefString(this, Constant.LANGUAGE_TYPE, Constant.LANGUAGE_ZH));
-        versionReqBean.setVersionCode(AppUtil.getVersionCode(this));
+        versionReqBean.setVersion_code(AppUtil.getVersionCode(this));
+        versionReqBean.setPlatform_code("android");
         versionInfoPresenter.getVersionInfo(versionReqBean);
     }
 
@@ -101,7 +100,7 @@ public class SettingActivity extends TextBarActivity implements IVersionInfoView
      */
     private void showQueryUpgradeDialog() {
         //判断是否强制升级
-        if (versionDetailBean.getIsFocreUpdate() == 1) {
+        if (versionDetailBean.getIs_focre_update()) {
             //强制,弹出没有取消的dialog
             DialogUtil.queryConfirm(this
                     , getString(R.string.tips_8)

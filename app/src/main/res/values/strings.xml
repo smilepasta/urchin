@@ -20,9 +20,11 @@
     <string name="tips_19">你有一条新的自定义的消息</string>
     <string name="tips_20">弹出默认消息样式</string>
     <string name="tips_21">弹出自定义消息样式</string>
-    <string name="tips_22">最多可拍%s张图片，已拍%s张</string>
-    <string name="tips_23">请选择照片上传</string>
-    <string name="tips_24">正在上传图片……</string>
+    <string name="tips_22">Can take up to %s photos and take %s photos.</string>
+    <string name="tips_23">Please select a photo upload</string>
+    <string name="tips_24">Uploading photo……</string>
+    <string name="tips_25">Description</string>
+    <string name="tips_26">是否确认提交数据?</string>
 
     <!-- 错误码对应的提示 -->
     <string name="tips_1001">网络不可用</string>
@@ -43,10 +45,10 @@
     <string name="retry">重试</string>
     <string name="refresh">刷新</string>
     <string name="zihhu_news">知乎日报</string>
-    <string name="try_set">尝试一下</string>
+    <string name="try_set">Test Demo</string>
     <string name="protobuf_demo">Protobuf用法</string>
 
-    <string name="setting">设置</string>
+    <string name="setting">常用设置</string>
     <string name="language_switch">语言切换</string>
     <string name="clear_cache">清除缓存</string>
     <string name="version_upgrade">版本升级</string>
@@ -65,12 +67,12 @@
     <string name="notification_message">通知栏消息</string>
     <string name="modify">修改</string>
     <string name="delete">删除</string>
-    <string name="image_upload">图片上传</string>
-    <string name="image_manage">图片管理</string>
-    <string name="image_history">图片浏览</string>
+    <string name="image_upload">Photo Upload</string>
+    <string name="image_detail">Photo Detail</string>
     <string name="faceu">人脸核身</string>
-    <string name="upload">上传</string>
-    <string name="upload_success">上传完毕</string>
+    <string name="upload">Upload</string>
+    <string name="upload_success">Upload Success!</string>
+    <string name="day">Day Photo</string>
 
 
 </resources>

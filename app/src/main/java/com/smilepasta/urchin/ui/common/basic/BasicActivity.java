@@ -12,6 +12,7 @@ import com.smilepasta.urchin.utils.DialogUtil;
 import com.smilepasta.urchin.utils.LogUtil;
 import com.smilepasta.urchin.utils.MyContextWrapper;
 import com.smilepasta.urchin.utils.PreUtil;
+import com.smilepasta.urchin.utils.UIUtil;
 
 import java.util.Locale;
 
@@ -92,5 +93,31 @@ public class BasicActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * 当用户提交请求时，二次确认
+     */
+    public void showConfirmSubmitDialog(IConfirmSubmitLisener confirmSubmitLisener) {
+        DialogUtil.query(this
+                , UIUtil.getString(R.string.hint)
+                , UIUtil.getString(R.string.tips_26)
+                , UIUtil.getString(R.string.cancel)
+                , UIUtil.getString(R.string.confirm)
+                , new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogUtil.cancel();
+                        //确认
+                        if (confirmSubmitLisener != null) {
+                            confirmSubmitLisener.confirmSubmit();
+                        }
+                    }
+                }
+                , new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogUtil.cancel();
+                    }
+                });
+    }
 
 }

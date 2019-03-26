@@ -2,6 +2,7 @@ package com.smilepasta.urchin.presenter.implPresenter;
 
 import android.content.Context;
 
+import com.smilepasta.urchin.bean.req.PageReqBean;
 import com.smilepasta.urchin.bean.resp.ImageRespBean;
 import com.smilepasta.urchin.http.UrchinHttpManager;
 import com.smilepasta.urchin.http.service.UrchinService;
@@ -31,10 +32,10 @@ public class GetImagePresenterImpl extends BasePresenterImpl implements IGetImag
     }
 
     @Override
-    public void getImage() {
+    public void getImage(PageReqBean pageReqBean) {
         view.showProgressDialog();
         Subscription s = UrchinHttpManager.createService(UrchinService.class)
-                .getImage()
+                .getImage(pageReqBean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ObserverCallBack<>(context, new ApiCallback<ImageRespBean>() {

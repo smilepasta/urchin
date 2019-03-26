@@ -34,6 +34,7 @@ public abstract class TextBarActivity extends BasicActivity {
     protected final static String ACTION_TYPE = "action_type";
     protected final static String ACTION_TYPE_MENU = "menu";
     protected final static String ACTION_TYPE_HISTORY = "history";
+    protected final static String ACTION_TYPE_UPLOAD = "upload";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +100,22 @@ public abstract class TextBarActivity extends BasicActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString(ACTION_TYPE, ACTION_TYPE_HISTORY);
+                menuIconAction(bundle);
+            }
+        });
+    }
+
+    /**
+     * 设置上传图片
+     */
+    protected void setUpload() {
+        ImageView uploadImageView = findViewById(R.id.iv_upload);
+        uploadImageView.setVisibility(View.VISIBLE);
+        uploadImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(ACTION_TYPE, ACTION_TYPE_UPLOAD);
                 menuIconAction(bundle);
             }
         });

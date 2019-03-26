@@ -34,9 +34,9 @@ public class FaceuAuthActivity extends AppCompatActivity implements ZQEngineCall
     private final static String secretKey = BuildConfig.FACEU_SECRETKEY;
 
     //是否先OCR流程
-    private boolean isOCRFirst = true;
+    private boolean isOCRFirst = false;
     //是否人脸比对
-    private boolean isFaceCompare = true;
+    private boolean isFaceCompare = false;
 
     //身份证国徽页面信息
     private IDCardBackInfo mIdCardBackInfo;
@@ -50,6 +50,8 @@ public class FaceuAuthActivity extends AppCompatActivity implements ZQEngineCall
     private boolean idCardBackSuccess = false;
     //活体检测成功
     private boolean livenessSuccess = false;
+    //是否返回活体动作照
+    private boolean isSaveAction = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,8 @@ public class FaceuAuthActivity extends AppCompatActivity implements ZQEngineCall
         integerSet.add(LivenessOperation.ACTION_FACE_TO_RIGHT);
         integerSet.add(LivenessOperation.ACTION_SWING_HEAD);
         livenessOperation.setActions(integerSet);
+        //设置是否返回活体动作照(可选,默认false)
+        livenessOperation.setSaveActionImage(isSaveAction);
         authEngine.startRealAuth(commonParam, isOCRFirst, isFaceCompare, idCardOperation, livenessOperation, FaceuAuthActivity.this);
 
     }
