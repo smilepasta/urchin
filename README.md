@@ -30,6 +30,6 @@ QINIU_BUCKET_NAME=
 ```
 
 # 环境
-部分接口使用Nodejs搭建简陋后端完成，<a href="https://github.com/smilepasta/NodejsDemo/blob/master/simple_demo/urchin.js">源码</a>
+部分接口使用Nodejs搭建简陋后端完成，<a href="https://github.com/smilepasta/NodejsDemo/blob/master/db_demo/urchin.js">源码</a>
 服务器来源于 <a href="https://bandwagonhost.com/vps-hosting.php">搬瓦工</a>
 域名注册于 <a href="https://wanwang.aliyun.com/domain/com/?spm=5176.10695662.1158081.2.336944c2WMhRGy">阿里云</a>

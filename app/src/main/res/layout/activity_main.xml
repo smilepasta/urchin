@@ -56,7 +56,6 @@
             android:text="@string/setting"
             android:textColor="@color/white" />
 
-
     </LinearLayout>
 
 </ScrollView>

@@ -11,10 +11,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
+import com.smilepasta.urchin.BuildConfig;
+import com.smilepasta.urchin.Constant;
 import com.smilepasta.urchin.R;
+import com.smilepasta.urchin.ui.common.WebViewActivity;
 import com.smilepasta.urchin.ui.common.basic.TextBarActivity;
-import com.smilepasta.urchin.ui.photo.ImageHomeActivity;
 import com.smilepasta.urchin.ui.demo.TryHomeActivity;
+import com.smilepasta.urchin.ui.photo.ImageHomeActivity;
 import com.smilepasta.urchin.ui.setting.SettingActivity;
 import com.smilepasta.urchin.ui.zhihu.ZhiHuHomeActivity;
 import com.smilepasta.urchin.utils.StringUtil;
@@ -57,6 +60,7 @@ public class MainActivity extends TextBarActivity {
                 ImageHomeActivity.start(MainActivity.this);
             }
         });
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this, Permission.STORAGE, Permission.REQUEST_STORAGE);

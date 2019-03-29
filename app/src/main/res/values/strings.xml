@@ -73,6 +73,7 @@
     <string name="upload">Upload</string>
     <string name="upload_success">Upload Success!</string>
     <string name="day">Day Photo</string>
+    <string name="me">About Me</string>
 
 
 </resources>
